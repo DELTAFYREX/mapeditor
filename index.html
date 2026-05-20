@@ -1027,8 +1027,12 @@ checkbox.addEventListener('change', (event) => {
           room[y][x] = myVariable ? "cont" : "F___";
 
           cell.style.background = "#F0F7FA";
+                    
+          cell.style.position = "relative";
 
-          cell.children[0].innerHTML = myVariable ? `
+          cell.style.overflow = "hidden";
+
+          cell.innerHTML = myVariable ? `
         <div style="
           position:absolute;
           inset:0;
