@@ -16,11 +16,17 @@
     /* LEFT SIDE */
 #editorArea {
   flex: 1;
+
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px;
-  gap: 12px;
+  flex-direction: row;
+
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  gap: 20px;
+
+  padding: 20px;
+
   overflow: auto;
 }
 
@@ -76,13 +82,39 @@
       resize: vertical;
       flex-shrink: 0;
     }
+#leftPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#jsonPanel {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+
+textarea {
+  width: 100%;
+  height: min(80vh, 700px);
+
+  font-family: monospace;
+  font-size: 14px;
+
+  resize: none;
+
+  box-sizing: border-box;
+}
 
   </style>
 </head>
 <body>
 
   <!-- LEFT SIDE -->
-  <div id="editorArea">
+<div id="editorArea">
+
+  <!-- LEFT SIDE -->
+  <div id="leftPanel">
 
     <h1>Nero.io Map Editor</h1>
 
@@ -100,9 +132,18 @@
 
     <div id="grid"></div>
 
+  </div>
+
+  <!-- RIGHT SIDE -->
+  <div id="jsonPanel">
+
+    <h2>Generated Map</h2>
+
     <textarea id="output"></textarea>
 
   </div>
+
+</div>
 
   <!-- RIGHT SIDE -->
   <div id="toolbar">
