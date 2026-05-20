@@ -300,6 +300,10 @@
     // RECTANGLE FILL
     let fillStart = null;
 
+    // UNDO / REDO
+    let undoStack = [];
+    let redoStack = [];
+
     // TILE COLORS
     const tileColors = {
       "____": "white",
@@ -309,6 +313,64 @@
       "nest": "purple",
       "lava": "orange"
     };
+
+    // SAVE STATE
+    function saveState() {
+
+      undoStack.push(JSON.stringify(room));
+
+      // LIMIT HISTORY SIZE
+      if (undoStack.length > 100) {
+        undoStack.shift();
+      }
+
+      redoStack = [];
+    }
+
+    // UNDO
+    function undo() {
+
+      if (undoStack.length === 0) return;
+
+      redoStack.push(JSON.stringify(room));
+
+      room = JSON.parse(undoStack.pop());
+
+      rebuildGrid();
+    }
+
+    // REDO
+    function redo() {
+
+      if (redoStack.length === 0) return;
+
+      undoStack.push(JSON.stringify(room));
+
+      room = JSON.parse(redoStack.pop());
+
+      rebuildGrid();
+    }
+
+    // CTRL+Z / CTRL+Y
+    document.addEventListener("keydown", (event) => {
+
+      // CTRL+Z
+      if (event.ctrlKey && event.key.toLowerCase() === "z") {
+
+        event.preventDefault();
+
+        undo();
+      }
+
+      // CTRL+Y
+      if (event.ctrlKey && event.key.toLowerCase() === "y") {
+
+        event.preventDefault();
+
+        redo();
+      }
+
+    });
 
     // TRACK MOUSE
     document.body.addEventListener("mousedown", (event) => {
@@ -357,6 +419,39 @@
       cell.style.background = currentColor;
     }
 
+    // REBUILD GRID
+    function rebuildGrid() {
+
+      const height = room.length;
+      const width = room[0].length;
+
+      const grid = document.getElementById("grid");
+
+      grid.innerHTML = "";
+
+      grid.style.gridTemplateColumns = `repeat(${width}, 1fr)`;
+      grid.style.gridTemplateRows = `repeat(${height}, 1fr)`;
+
+      for (let y = 0; y < height; y++) {
+
+        for (let x = 0; x < width; x++) {
+
+          const cell = document.createElement("div");
+
+          cell.classList.add("cell");
+
+          const tile = room[y][x];
+
+          cell.style.background =
+            tileColors[tile] || "magenta";
+
+          attachCellEvents(cell, x, y);
+
+          grid.appendChild(cell);
+        }
+      }
+    }
+
     // FILL RECTANGLE
     function fillRectangle(endX, endY) {
 
@@ -395,6 +490,8 @@
       cell.addEventListener("mousedown", (event) => {
 
         event.preventDefault();
+
+        saveState();
 
         // RIGHT CLICK ERASE
         if (event.button === 2) {
@@ -468,14 +565,7 @@
       const width = parseInt(document.getElementById("widthInput").value);
       const height = parseInt(document.getElementById("heightInput").value);
 
-      const grid = document.getElementById("grid");
-
-      grid.innerHTML = "";
-
       room = [];
-
-      grid.style.gridTemplateColumns = `repeat(${width}, 1fr)`;
-      grid.style.gridTemplateRows = `repeat(${height}, 1fr)`;
 
       for (let y = 0; y < height; y++) {
 
@@ -483,11 +573,6 @@
 
         for (let x = 0; x < width; x++) {
 
-          const cell = document.createElement("div");
-
-          cell.classList.add("cell");
-
-          // BORDER WALLS
           const isBorder =
             x === 0 ||
             y === 0 ||
@@ -498,20 +583,14 @@
 
             room[y][x] = "wall";
 
-            cell.style.background = "gray";
-
           } else {
 
             room[y][x] = "____";
-
-            cell.style.background = "white";
           }
-
-          attachCellEvents(cell, x, y);
-
-          grid.appendChild(cell);
         }
       }
+
+      rebuildGrid();
     }
 
     // GENERATE JSON
@@ -560,41 +639,15 @@
 
         text = text.replace(/\b([a-zA-Z_]+)\b/g, '"$1"');
 
-        const importedRoom = JSON.parse(text);
+        room = JSON.parse(text);
 
-        room = importedRoom;
+        document.getElementById("widthInput").value =
+          room[0].length;
 
-        const height = room.length;
-        const width = room[0].length;
+        document.getElementById("heightInput").value =
+          room.length;
 
-        document.getElementById("widthInput").value = width;
-        document.getElementById("heightInput").value = height;
-
-        const grid = document.getElementById("grid");
-
-        grid.innerHTML = "";
-
-        grid.style.gridTemplateColumns = `repeat(${width}, 1fr)`;
-        grid.style.gridTemplateRows = `repeat(${height}, 1fr)`;
-
-        for (let y = 0; y < height; y++) {
-
-          for (let x = 0; x < width; x++) {
-
-            const cell = document.createElement("div");
-
-            cell.classList.add("cell");
-
-            const tile = room[y][x];
-
-            cell.style.background =
-              tileColors[tile] || "magenta";
-
-            attachCellEvents(cell, x, y);
-
-            grid.appendChild(cell);
-          }
-        }
+        rebuildGrid();
 
       } catch (error) {
 
