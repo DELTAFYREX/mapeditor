@@ -648,6 +648,37 @@
       cell.style.overflow = "hidden";
     }
 
+        function setSoftPointTileblack(cell, number) {
+
+      cell.style.background = "#cacacb";
+
+      cell.innerHTML = `
+        <div style="
+          position:absolute;
+          inset:0;
+
+          display:flex;
+          align-items:center;
+          justify-content:center;
+
+          pointer-events:none;
+
+          font-size:85%;
+          font-weight:bold;
+
+          color:white;
+        ">
+          ${number}
+        </div>
+      `;
+
+      cell.style.background = "black",
+
+      cell.style.position = "relative";
+
+      cell.style.overflow = "hidden";
+    }
+
     function paintTile(cell, x, y) {
 
       room[y][x] = currentTile;
@@ -717,14 +748,14 @@
 
       if (currentTile === "blrd") {
 
-        setSoftPointTile(cell, "□");
+        setSoftPointTileblack(cell, "□");
 
         return;
       }
 
       if (currentTile === "blrk") {
 
-        setSoftPointTile(cell, "▣");
+        setSoftPointTileblack(cell, "▣");
 
         return;
       }
@@ -808,12 +839,12 @@
 
           else if (tile === "blrd") {
 
-            setSoftPointTile(cell, "□");
+            setSoftPointTileblack(cell, "□");
           }
 
           else if (tile === "blrk") {
 
-            setSoftPointTile(cell, "▣");
+            setSoftPointTileblack(cell, "▣");
           }
 
           else if (
@@ -907,12 +938,12 @@
 
           else if (currentTile === "blackroid") {
 
-            setSoftPointTile(cell, "□");
+            setSoftPointTileblack(cell, "□");
           }
 
           else if (currentTile === "blackrock") {
 
-            setSoftPointTile(cell, "▣");
+            setSoftPointTileblack(cell, "▣");
           }
 
           else {
