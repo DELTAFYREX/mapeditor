@@ -958,8 +958,8 @@ checkbox.addEventListener('change', (event) => {
 
             cell.innerHTML = "";
 
-          cell.style.position = myVariable ? "relative" : "";
-          cell.style.overflow = myVariable ? "hidden" : "";
+            cell.style.position = "";
+            cell.style.overflow = "";
 
             cell.style.background = currentColor;
           }
@@ -1052,8 +1052,8 @@ checkbox.addEventListener('change', (event) => {
         </div>
       ` : "";
 
-          cell.style.position = "";
-          cell.style.overflow = "";
+          cell.style.position = myVariable ? "relative" : "";
+          cell.style.overflow = myVariable ? "hidden" : "";
 
           return;
         }
