@@ -977,12 +977,29 @@ checkbox.addEventListener('change', (event) => {
 
         if (event.button === 2) {
 
-          room[y][x] = "____";
+          room[y][x] = myVariable ? "F___" : "cont";
 
           cell.style.background = "#F0F7FA";
 
-          cell.innerHTML = "";
+          cell.innerHTML = myVariable ? "" : `
+        <div style="
+          position:absolute;
+          inset:0;
 
+          display:flex;
+          align-items:center;
+          justify-content:center;
+
+          pointer-events:none;
+
+          font-size:65%;
+          font-weight:bold;
+
+          color:black;
+        ">
+          ⬡
+        </div>
+      `;
           cell.style.position = "";
           cell.style.overflow = "";
 
@@ -1006,11 +1023,29 @@ checkbox.addEventListener('change', (event) => {
 
         if (mouseDown && eraseMode) {
 
-          room[y][x] = myVariable ? "____" : "cont";
+          room[y][x] = myVariable ? "F___" : "cont";
 
           cell.style.background = "#F0F7FA";
 
-          cell.innerHTML = "";
+          cell.innerHTML = myVariable ? "" : `
+        <div style="
+          position:absolute;
+          inset:0;
+
+          display:flex;
+          align-items:center;
+          justify-content:center;
+
+          pointer-events:none;
+
+          font-size:65%;
+          font-weight:bold;
+
+          color:black;
+        ">
+          ⬡
+        </div>
+      `;
 
           cell.style.position = "";
           cell.style.overflow = "";
