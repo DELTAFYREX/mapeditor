@@ -187,6 +187,8 @@
 
         <button onclick="importJSON()">Import JSON</button>
 
+        <input id="myCheckbox" type="checkbox" checked>
+
       </div>
 
       <div id="mainContent">
@@ -412,6 +414,13 @@
 
     let undoStack = [];
     let redoStack = [];
+
+let myVariable = false;
+const checkbox = document.querySelector('#myCheckbox');
+
+checkbox.addEventListener('change', (event) => {
+  myVariable = event.target.checked; // Sets variable to true or false
+});
 
     const tileColors = {
 
@@ -997,7 +1006,7 @@
 
         if (mouseDown && eraseMode) {
 
-          room[y][x] = "____";
+          room[y][x] = myVariable ? "____" : "cont";
 
           cell.style.background = "#F0F7FA";
 
