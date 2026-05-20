@@ -355,7 +355,7 @@
 
     <button class="toolButton"
             style="background: linear-gradient(90deg, red, orange, yellow, green, blue, purple);"
-            onclick="selectTile('dcf0', 'dancefloor', this)">
+            onclick="selectTile('dcf0', 'rainbow', this)">
       Rainbow
     </button>
 
@@ -457,7 +457,7 @@
 
       "blrk": "blackrock",
 
-      "dcf0": "dancefloor",
+      "dcf0": "rainbow",
 
       "dcf1": "dancefloor1",
 
@@ -817,7 +817,7 @@
           }
 
           else if (
-            !color.includes("flash") &&
+            !color.includes("dancefloor") &&
             color !== "rainbow"
           ) {
 
@@ -1129,7 +1129,7 @@
           if (!cell) continue;
 
           // RAINBOW
-          if (tile === "dancefloor") {
+          if (tile === "rainbow") {
 
             const hue =
               (time / 10 + (x + y) * 20) % 360;
