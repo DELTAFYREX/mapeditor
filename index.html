@@ -20,53 +20,76 @@
   flex: 1;
 
   display: flex;
-  gap: 20px;
 
   padding: 20px;
+  gap: 20px;
 
-  overflow: auto;
+  overflow: hidden;
 }
 
 /* LEFT SIDE */
 #leftPanel {
+  flex: 1;
+
   display: flex;
   flex-direction: column;
-  gap: 14px;
 
   min-width: 0;
 }
 
-/* TOP CONTROLS */
+/* CONTROLS */
 #controls {
   display: flex;
   flex-wrap: wrap;
+
   align-items: center;
+
   gap: 10px;
+
+  margin-bottom: 15px;
 }
 
 #controls input {
   width: 70px;
+
   padding: 5px;
+
   font-size: 16px;
 }
 
 #controls button {
   padding: 8px 12px;
+
   font-size: 14px;
+
   cursor: pointer;
 }
 
-/* GRID */
+/* MAIN CONTENT AREA */
+#mainContent {
+  flex: 1;
+
+  display: flex;
+
+  gap: 20px;
+
+  min-height: 0;
+}
+
+/* GRID SIDE */
 #gridContainer {
   display: flex;
+
+  align-items: flex-start;
   justify-content: flex-start;
 }
 
+/* GRID */
 #grid {
   display: grid;
 
-  width: min(65vw, 75vh);
-  height: min(65vw, 75vh);
+  width: min(65vw, calc(100vh - 160px));
+  height: min(65vw, calc(100vh - 160px));
 
   background: white;
 
@@ -77,28 +100,33 @@
 
 .cell {
   border: 1px solid #888;
+
   cursor: pointer;
+
   box-sizing: border-box;
 }
 
-/* JSON PANEL */
+/* JSON SIDE */
 #jsonPanel {
-  width: 320px;
+  flex: 1;
 
   display: flex;
   flex-direction: column;
-  gap: 10px;
 
-  flex-shrink: 0;
+  min-width: 250px;
+  min-height: 0;
 }
 
 #jsonPanel h2 {
-  margin: 0;
+  margin-top: 0;
+  margin-bottom: 10px;
 }
 
+/* JSON BOX */
 textarea {
+  flex: 1;
+
   width: 100%;
-  height: min(65vw, 75vh);
 
   font-family: monospace;
   font-size: 14px;
@@ -184,21 +212,23 @@ textarea {
 
 </div>
 
-<div id="gridContainer">
-  <div id="grid"></div>
-</div>
-    </div>
+<div id="mainContent">
 
-    <!-- JSON PANEL -->
-    <div id="jsonPanel">
+  <!-- GRID -->
+  <div id="gridContainer">
+    <div id="grid"></div>
+  </div>
 
-      <h2>Generated Map</h2>
+  <!-- JSON -->
+  <div id="jsonPanel">
 
-      <textarea id="output"></textarea>
+    <h2>Generated Map</h2>
 
-    </div>
+    <textarea id="output"></textarea>
 
   </div>
+
+</div>
 
   <!-- TOOLBAR -->
   <div id="toolbar">
