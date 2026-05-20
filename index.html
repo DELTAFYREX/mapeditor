@@ -156,6 +156,8 @@
 
       gap: 12px;
 
+      overflow-y: auto;
+
       flex-shrink: 0;
     }
 
@@ -171,7 +173,7 @@
 
       cursor: pointer;
 
-      font-size: 18px;
+      font-size: 16px;
       font-weight: bold;
 
       transition: transform 0.1s;
@@ -282,6 +284,44 @@
       Lava
     </button>
 
+    <!-- ANIMATED TILES -->
+
+    <button class="toolButton"
+            style="background: linear-gradient(90deg, red, orange, yellow, green, blue, purple);"
+            onclick="selectTile('dancefloor', 'rainbow', this)">
+      Rainbow
+    </button>
+
+    <button class="toolButton"
+            style="background: blue;"
+            onclick="selectTile('dancefloor1', 'flashBlueRed', this)">
+      Blue/Red
+    </button>
+
+    <button class="toolButton"
+            style="background: cyan;"
+            onclick="selectTile('dancefloor2', 'flashBlueGray', this)">
+      Blue/Gray
+    </button>
+
+    <button class="toolButton"
+            style="background: lightblue;"
+            onclick="selectTile('dancefloor3', 'flashGreyBlue', this)">
+      Gray/Blue
+    </button>
+
+    <button class="toolButton"
+            style="background: red;"
+            onclick="selectTile('dancefloor4', 'flashRedGrey', this)">
+      Red/Gray
+    </button>
+
+    <button class="toolButton"
+            style="background: pink;"
+            onclick="selectTile('dancefloor5', 'flashGreyRed', this)">
+      Gray/Red
+    </button>
+
   </div>
 
   <script>
@@ -311,7 +351,14 @@
       "tree": "green",
       "water": "blue",
       "nest": "purple",
-      "lava": "orange"
+      "lava": "orange",
+
+      "dancefloor": "rainbow",
+      "dancefloor1": "flashBlueRed",
+      "dancefloor2": "flashBlueGray",
+      "dancefloor3": "flashGreyBlue",
+      "dancefloor4": "flashRedGrey",
+      "dancefloor5": "flashGreyRed",
     };
 
     // SAVE STATE
@@ -319,7 +366,6 @@
 
       undoStack.push(JSON.stringify(room));
 
-      // LIMIT HISTORY SIZE
       if (undoStack.length > 100) {
         undoStack.shift();
       }
@@ -354,7 +400,6 @@
     // CTRL+Z / CTRL+Y
     document.addEventListener("keydown", (event) => {
 
-      // CTRL+Z
       if (event.ctrlKey && event.key.toLowerCase() === "z") {
 
         event.preventDefault();
@@ -362,7 +407,6 @@
         undo();
       }
 
-      // CTRL+Y
       if (event.ctrlKey && event.key.toLowerCase() === "y") {
 
         event.preventDefault();
@@ -442,8 +486,11 @@
 
           const tile = room[y][x];
 
-          cell.style.background =
-            tileColors[tile] || "magenta";
+          const color = tileColors[tile] || "magenta";
+
+          if (!color.includes("flash") && color !== "rainbow") {
+            cell.style.background = color;
+          }
 
           attachCellEvents(cell, x, y);
 
@@ -658,8 +705,104 @@
       }
     }
 
+    // ANIMATE TILES
+    function animateTiles() {
+
+      const cells = document.querySelectorAll(".cell");
+
+      if (room.length === 0) {
+
+        requestAnimationFrame(animateTiles);
+
+        return;
+      }
+
+      const width = room[0].length;
+
+      const time = Date.now();
+
+      for (let y = 0; y < room.length; y++) {
+
+        for (let x = 0; x < room[y].length; x++) {
+
+          const tile = room[y][x];
+
+          const index = y * width + x;
+
+          const cell = cells[index];
+
+          if (!cell) continue;
+
+          // RAINBOW
+          if (tile === "dancefloor") {
+
+            const hue =
+              (time / 10 + (x + y) * 20) % 360;
+
+            cell.style.background =
+              `hsl(${hue}, 100%, 50%)`;
+          }
+
+          // BLUE / RED
+          else if (tile === "dancefloor1") {
+
+            const flash =
+              Math.sin(time / 150) > 0;
+
+            cell.style.background =
+              flash ? "blue" : "red";
+          }
+
+          // BLUE / GRAY
+          else if (tile === "dancefloor2") {
+
+            const flash =
+              Math.sin(time / 150) > 0;
+
+            cell.style.background =
+              flash ? "blue" : "gray";
+          }
+
+          // GRAY / BLUE
+          else if (tile === "dancefloor3") {
+
+            const flash =
+              Math.sin(time / 150) > 0;
+
+            cell.style.background =
+              flash ? "gray" : "blue";
+          }
+
+          // RED / GRAY
+          else if (tile === "dancefloor4") {
+
+            const flash =
+              Math.sin(time / 150) > 0;
+
+            cell.style.background =
+              flash ? "red" : "gray";
+          }
+
+          // GRAY / RED
+          else if (tile === "dancefloor5") {
+
+            const flash =
+              Math.sin(time / 150) > 0;
+
+            cell.style.background =
+              flash ? "gray" : "red";
+          }
+
+        }
+      }
+
+      requestAnimationFrame(animateTiles);
+    }
+
     // START
     createGrid();
+
+    animateTiles();
 
   </script>
 </body>
