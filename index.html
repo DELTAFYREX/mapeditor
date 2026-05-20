@@ -648,9 +648,9 @@
       cell.style.overflow = "hidden";
     }
 
-        function setSoftPointTileblack(cell, number) {
+        function setSoftPointTileblack(cell, number, color) {
 
-      cell.style.background = "#cacacb";
+      cell.style.background = color;
 
       cell.innerHTML = `
         <div style="
@@ -734,28 +734,28 @@
 
       if (currentTile === "roid") {
 
-        setSoftPointTile(cell, "□");
+        setSoftPointTileblack(cell, "□", "#bababa");
 
         return;
       }
 
       if (currentTile === "rock") {
 
-        setSoftPointTile(cell, "▣");
+        setSoftPointTileblack(cell, "▣", "#bababa");
 
         return;
       }
 
       if (currentTile === "blrd") {
 
-        setSoftPointTileblack(cell, "□");
+        setSoftPointTileblack(cell, "□", "black");
 
         return;
       }
 
       if (currentTile === "blrk") {
 
-        setSoftPointTileblack(cell, "▣");
+        setSoftPointTileblack(cell, "▣", "black");
 
         return;
       }
@@ -829,22 +829,22 @@
 
           else if (tile === "roid") {
 
-            setSoftPointTile(cell, "□");
+            setSoftPointTileblack(cell, "□", "#bababa");
           }
 
           else if (tile === "rock") {
 
-            setSoftPointTile(cell, "▣");
+            setSoftPointTileblack(cell, "▣", "#bababa");
           }
 
           else if (tile === "blrd") {
 
-            setSoftPointTileblack(cell, "□");
+            setSoftPointTileblack(cell, "□", "black");
           }
 
           else if (tile === "blrk") {
 
-            setSoftPointTileblack(cell, "▣");
+            setSoftPointTileblack(cell, "▣", "black");
           }
 
           else if (
@@ -928,22 +928,22 @@
 
           else if (currentTile === "roid") {
 
-            setSoftPointTile(cell, "□");
+            setSoftPointTileblack(cell, "□", "#bababa");
           }
 
           else if (currentTile === "rock") {
 
-            setSoftPointTile(cell, "▣");
+            setSoftPointTileblack(cell, "▣", "#bababa");
           }
 
           else if (currentTile === "blackroid") {
 
-            setSoftPointTileblack(cell, "□");
+            setSoftPointTileblack(cell, "□", "black");
           }
 
           else if (currentTile === "blackrock") {
 
-            setSoftPointTileblack(cell, "▣");
+            setSoftPointTileblack(cell, "▣", "black");
           }
 
           else {
