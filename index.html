@@ -69,7 +69,7 @@
       width: min(65vw, calc(100vh - 160px));
       height: min(65vw, calc(100vh - 160px));
 
-      background: white;
+      background: #F0F7FA;
 
       border: 2px solid black;
 
@@ -214,93 +214,96 @@
 
     <h2>Tiles</h2>
 
-<!-- EMPTY -->
-<button class="toolButton selectedTool"
-        style="background:#F0F7FA; color:black;"
-        onclick="selectTile('____', '#F0F7FA', this)">
-  Empty
-</button>
+    <!-- EMPTY -->
+    <button class="toolButton selectedTool"
+            style="background:#F0F7FA; color:black;"
+            onclick="selectTile('____', '#F0F7FA', this)">
+      Empty
+    </button>
 
-<!-- EMPTY HEX -->
-<button class="toolButton"
-        style="background:#F0F7FA; color:black;"
-        onclick="selectTile('neutralSpawn', 'neutralSpawn', this)">
-  ⬡ Neutral Spawn
-</button>
+    <!-- WALL -->
+    <button class="toolButton"
+            style="background:#959597;"
+            onclick="selectTile('wall', '#959597', this)">
+      Wall
+    </button>
 
-<!-- WALL -->
-<button class="toolButton"
-        style="background:#959597;"
-        onclick="selectTile('wall', '#959597', this)">
-  Wall
-</button>
-
+    <!-- TREE -->
     <button class="toolButton"
             style="background:green;"
             onclick="selectTile('tree', 'green', this)">
       Tree
     </button>
 
+    <!-- WATER -->
     <button class="toolButton"
             style="background:blue;"
             onclick="selectTile('water', 'blue', this)">
       Water
     </button>
 
-<!-- NEST -->
-<button class="toolButton"
-        style="background:#E0E1F4;"
-        onclick="selectTile('nest', '#E0E1F4', this)">
-  Nest
-</button>
+    <!-- NEST -->
+    <button class="toolButton"
+            style="background:#E0E1F4;"
+            onclick="selectTile('nest', '#E0E1F4', this)">
+      Nest
+    </button>
 
+    <!-- LAVA -->
     <button class="toolButton"
             style="background:orange;"
             onclick="selectTile('lava', 'orange', this)">
       Lava
     </button>
 
-<!-- BLUE SPAWN -->
-<button class="toolButton"
-        style="background:#CAE4F6; color:black;"
-        onclick="selectTile('teamBlueSpawn', 'teamBlueSpawn', this)">
-  ⬡ Blue Spawn
-</button>
+    <!-- BLUE SPAWN -->
+    <button class="toolButton"
+            style="background:#CAE4F6; color:black;"
+            onclick="selectTile('teamBlueSpawn', 'teamBlueSpawn', this)">
+      ⬡ Blue Spawn
+    </button>
 
-<!-- RED SPAWN -->
-<button class="toolButton"
-        style="background:#F3CED1; color:black;"
-        onclick="selectTile('teamRedSpawn', 'teamRedSpawn', this)">
-  ⬡ Red Spawn
-</button>
+    <!-- RED SPAWN -->
+    <button class="toolButton"
+            style="background:#F3CED1; color:black;"
+            onclick="selectTile('teamRedSpawn', 'teamRedSpawn', this)">
+      ⬡ Red Spawn
+    </button>
+
+    <!-- NEUTRAL SPAWN -->
+    <button class="toolButton"
+            style="background:#F0F7FA; color:black;"
+            onclick="selectTile('neutralSpawn', 'neutralSpawn', this)">
+      ⬡ Neutral Spawn
+    </button>
 
     <!-- CONTROL POINT 1 -->
     <button class="toolButton"
-            style="background: linear-gradient(90deg, red, white, blue); color:black;"
+            style="background: linear-gradient(90deg, #f6dede, #F0F7FA, #dcecf8); color:black;"
             onclick="selectTile('controlPoint1', 'controlPoint1', this)">
       1 Control Point
     </button>
 
     <!-- CONTROL POINT 2 -->
     <button class="toolButton"
-            style="background: linear-gradient(90deg, red, white, blue); color:black;"
+            style="background: linear-gradient(90deg, #f6dede, #F0F7FA, #dcecf8); color:black;"
             onclick="selectTile('controlPoint2', 'controlPoint2', this)">
       2 Control Point
     </button>
 
-  <!-- SOFT POINT 1 -->
-<button class="toolButton"
-        style="background:#cacacb; color:black;"
-        onclick="selectTile('softPoint1', 'softPoint1', this)">
-  1 Soft Point
-</button>
+    <!-- SOFT POINT 1 -->
+    <button class="toolButton"
+            style="background:#cacacb; color:black;"
+            onclick="selectTile('softPoint1', 'softPoint1', this)">
+      1 Soft Point
+    </button>
 
-<!-- SOFT POINT 2 -->
-<button class="toolButton"
-        style="background:#cacacb; color:black;"
-        onclick="selectTile('softPoint2', 'softPoint2', this)">
-  2 Soft Point
-</button>
+    <!-- SOFT POINT 2 -->
+    <button class="toolButton"
+            style="background:#cacacb; color:black;"
+            onclick="selectTile('softPoint2', 'softPoint2', this)">
+      2 Soft Point
+    </button>
 
     <!-- ANIMATED TILES -->
 
@@ -347,7 +350,7 @@
     let room = [];
 
     let currentTile = "____";
-    let currentColor = "white";
+    let currentColor = "#F0F7FA";
 
     let mouseDown = false;
     let eraseMode = false;
@@ -357,46 +360,46 @@
     let undoStack = [];
     let redoStack = [];
 
-const tileColors = {
+    const tileColors = {
 
-  "____": "#F0F7FA",
+      "____": "#F0F7FA",
 
-  "wall": "#959597",
+      "wall": "#959597",
 
-  "tree": "green",
+      "tree": "green",
 
-  "water": "blue",
+      "water": "blue",
 
-  "nest": "#E0E1F4",
+      "nest": "#E0E1F4",
 
-  "lava": "orange",
+      "lava": "orange",
 
-  "teamBlueSpawn": "teamBlueSpawn",
+      "teamBlueSpawn": "teamBlueSpawn",
 
-  "teamRedSpawn": "teamRedSpawn",
+      "teamRedSpawn": "teamRedSpawn",
 
-  "neutralSpawn": "neutralSpawn",
+      "neutralSpawn": "neutralSpawn",
 
-  "controlPoint1": "controlPoint1",
+      "controlPoint1": "controlPoint1",
 
-  "controlPoint2": "controlPoint2",
+      "controlPoint2": "controlPoint2",
 
-  "softPoint1": "softPoint1",
+      "softPoint1": "softPoint1",
 
-  "softPoint2": "softPoint2",
+      "softPoint2": "softPoint2",
 
-  "dancefloor": "rainbow",
+      "dancefloor": "rainbow",
 
-  "dancefloor1": "flashBlueRed",
+      "dancefloor1": "flashBlueRed",
 
-  "dancefloor2": "flashBlueGray",
+      "dancefloor2": "flashBlueGray",
 
-  "dancefloor3": "flashGreyBlue",
+      "dancefloor3": "flashGreyBlue",
 
-  "dancefloor4": "flashRedGrey",
+      "dancefloor4": "flashRedGrey",
 
-  "dancefloor5": "flashGreyRed",
-};
+      "dancefloor5": "flashGreyRed",
+    };
 
     function saveState() {
 
@@ -485,63 +488,96 @@ const tileColors = {
       button.classList.add("selectedTool");
     }
 
-function setSpawnTile(cell, color) {
+    function setSpawnTile(cell, color) {
 
-  cell.style.background = color;
+      cell.style.background = color;
 
-  cell.innerHTML = `
-    <div style="
-      position:absolute;
-      inset:0;
+      cell.innerHTML = `
+        <div style="
+          position:absolute;
+          inset:0;
 
-      display:flex;
-      align-items:center;
-      justify-content:center;
+          display:flex;
+          align-items:center;
+          justify-content:center;
 
-      pointer-events:none;
+          pointer-events:none;
 
-      font-size:65%;
-      font-weight:bold;
+          font-size:65%;
+          font-weight:bold;
 
-      color:white;
-    ">
-      ⬡
-    </div>
-  `;
+          color:white;
+        ">
+          ⬡
+        </div>
+      `;
 
-  cell.style.position = "relative";
+      cell.style.position = "relative";
 
-  cell.style.overflow = "hidden";
-}
+      cell.style.overflow = "hidden";
+    }
 
-function setSoftPointTile(cell, number) {
+    function setControlPointTile(cell, number) {
 
-  cell.style.background = "#cacacb";
+      cell.innerHTML = `
+        <div style="
+          position:absolute;
+          inset:0;
 
-  cell.innerHTML = `
-    <div style="
-      position:absolute;
-      inset:0;
+          display:flex;
+          align-items:center;
+          justify-content:center;
 
-      display:flex;
-      align-items:center;
-      justify-content:center;
+          pointer-events:none;
 
-      pointer-events:none;
+          font-size:85%;
+          font-weight:bold;
 
-      font-size:85%;
-      font-weight:bold;
+          color:black;
 
-      color:black;
-    ">
-      ${number}
-    </div>
-  `;
+          text-shadow:
+            1px 1px 0 white,
+           -1px -1px 0 white,
+            1px -1px 0 white,
+           -1px 1px 0 white;
+        ">
+          ${number}
+        </div>
+      `;
 
-  cell.style.position = "relative";
+      cell.style.position = "relative";
 
-  cell.style.overflow = "hidden";
-}
+      cell.style.overflow = "hidden";
+    }
+
+    function setSoftPointTile(cell, number) {
+
+      cell.style.background = "#cacacb";
+
+      cell.innerHTML = `
+        <div style="
+          position:absolute;
+          inset:0;
+
+          display:flex;
+          align-items:center;
+          justify-content:center;
+
+          pointer-events:none;
+
+          font-size:85%;
+          font-weight:bold;
+
+          color:black;
+        ">
+          ${number}
+        </div>
+      `;
+
+      cell.style.position = "relative";
+
+      cell.style.overflow = "hidden";
+    }
 
     function paintTile(cell, x, y) {
 
@@ -561,6 +597,13 @@ function setSoftPointTile(cell, number) {
         return;
       }
 
+      if (currentTile === "neutralSpawn") {
+
+        setSpawnTile(cell, "#F0F7FA");
+
+        return;
+      }
+
       if (currentTile === "controlPoint1") {
 
         setControlPointTile(cell, "1");
@@ -575,29 +618,19 @@ function setSoftPointTile(cell, number) {
         return;
       }
 
-// NEUTRAL SPAWN
-if (currentTile === "neutralSpawn") {
+      if (currentTile === "softPoint1") {
 
-  setSpawnTile(cell, "#F0F7FA");
+        setSoftPointTile(cell, "1");
 
-  return;
-}
+        return;
+      }
 
-// SOFT POINT 1
-if (currentTile === "softPoint1") {
+      if (currentTile === "softPoint2") {
 
-  setSoftPointTile(cell, "1");
+        setSoftPointTile(cell, "2");
 
-  return;
-}
-
-// SOFT POINT 2
-if (currentTile === "softPoint2") {
-
-  setSoftPointTile(cell, "2");
-
-  return;
-}
+        return;
+      }
 
       cell.innerHTML = "";
 
@@ -633,12 +666,17 @@ if (currentTile === "softPoint2") {
 
           if (tile === "teamBlueSpawn") {
 
-            setSpawnTile(cell, "#4da6ff");
+            setSpawnTile(cell, "#CAE4F6");
           }
 
           else if (tile === "teamRedSpawn") {
 
-            setSpawnTile(cell, "#ff4d4d");
+            setSpawnTile(cell, "#F3CED1");
+          }
+
+          else if (tile === "neutralSpawn") {
+
+            setSpawnTile(cell, "#F0F7FA");
           }
 
           else if (tile === "controlPoint1") {
@@ -651,20 +689,15 @@ if (currentTile === "softPoint2") {
             setControlPointTile(cell, "2");
           }
 
-else if (tile === "neutralSpawn") {
+          else if (tile === "softPoint1") {
 
-  setSpawnTile(cell, "#F0F7FA");
-}
+            setSoftPointTile(cell, "1");
+          }
 
-else if (tile === "softPoint1") {
+          else if (tile === "softPoint2") {
 
-  setSoftPointTile(cell, "1");
-}
-
-else if (tile === "softPoint2") {
-
-  setSoftPointTile(cell, "2");
-}
+            setSoftPointTile(cell, "2");
+          }
 
           else if (
             !color.includes("flash") &&
@@ -712,12 +745,17 @@ else if (tile === "softPoint2") {
 
           if (currentTile === "teamBlueSpawn") {
 
-            setSpawnTile(cell, "#4da6ff");
+            setSpawnTile(cell, "#CAE4F6");
           }
 
           else if (currentTile === "teamRedSpawn") {
 
-            setSpawnTile(cell, "#ff4d4d");
+            setSpawnTile(cell, "#F3CED1");
+          }
+
+          else if (currentTile === "neutralSpawn") {
+
+            setSpawnTile(cell, "#F0F7FA");
           }
 
           else if (currentTile === "controlPoint1") {
@@ -730,20 +768,15 @@ else if (tile === "softPoint2") {
             setControlPointTile(cell, "2");
           }
 
-else if (currentTile === "neutralSpawn") {
+          else if (currentTile === "softPoint1") {
 
-  setSpawnTile(cell, "#F0F7FA");
-}
+            setSoftPointTile(cell, "1");
+          }
 
-else if (currentTile === "softPoint1") {
+          else if (currentTile === "softPoint2") {
 
-  setSoftPointTile(cell, "1");
-}
-
-else if (currentTile === "softPoint2") {
-
-  setSoftPointTile(cell, "2");
-}
+            setSoftPointTile(cell, "2");
+          }
 
           else {
 
@@ -800,7 +833,7 @@ else if (currentTile === "softPoint2") {
           room[y][x] = "____";
 
           cell.style.background = "#F0F7FA";
-          
+
           cell.innerHTML = "";
 
           cell.style.position = "";
@@ -1024,30 +1057,30 @@ else if (currentTile === "softPoint2") {
             tile === "controlPoint2"
           ) {
 
-            const speed = 250;
+            const speed = 550;
 
             const phase =
               Math.floor(time / speed) % 4;
 
-if (phase === 0) {
+            if (phase === 0) {
 
-  cell.style.background = "#f6dede";
-}
+              cell.style.background = "#f6dede";
+            }
 
-else if (phase === 1) {
+            else if (phase === 1) {
 
-  cell.style.background = "#F0F7FA";
-}
+              cell.style.background = "#F0F7FA";
+            }
 
-else if (phase === 2) {
+            else if (phase === 2) {
 
-  cell.style.background = "#dcecf8";
-}
+              cell.style.background = "#dcecf8";
+            }
 
-else {
+            else {
 
-  cell.style.background = "#F0F7FA";
-}
+              cell.style.background = "#F0F7FA";
+            }
           }
 
         }
