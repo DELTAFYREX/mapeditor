@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Game Map Editor</title>
+  <title>Nero.io Map Editor</title>
 
   <style>
 
@@ -73,7 +73,7 @@
   <!-- LEFT SIDE -->
   <div id="editorArea">
 
-    <h1>Map Editor</h1>
+    <h1>Nero.io Map Tile Editor</h1>
 
     <div>
       Width:
@@ -82,7 +82,7 @@
       Height:
       <input type="number" id="heightInput" value="15" min="1">
 
-      <button onclick="createGrid()">Create Grid</button>
+      <button onclick="createGrid()">Create Map Grid</button>
 
       <button onclick="generateJSON()">Generate JSON</button>
     </div>
@@ -111,9 +111,15 @@
     </button>
 
     <button class="toolButton"
+            style="background:gray;"
+            onclick="selectTile('wall', 'gray', this)">
+      Wall
+    </button>
+
+    <button class="toolButton"
             style="background:green;"
-            onclick="selectTile('tree', 'green', this)">
-      Tree
+            onclick="selectTile('food', 'green', this)">
+      Food
     </button>
 
     <button class="toolButton"
@@ -130,8 +136,8 @@
 
     <button class="toolButton"
             style="background:orange;"
-            onclick="selectTile('lava', 'orange', this)">
-      Lava
+            onclick="selectTile('speed', 'orange', this)">
+      Boost
     </button>
 
   </div>
@@ -149,10 +155,11 @@
     const tileColors = {
       "____": "white",
       "rock": "gray",
-      "tree": "green",
+      "wall": "gray",
+      "food": "green",
       "water": "blue",
       "nest": "purple",
-      "lava": "orange"
+      "speed": "orange"
     };
 
     function selectTile(tileName, color, button) {
