@@ -187,7 +187,7 @@
 
         <button onclick="importJSON()">Import JSON</button>
 
-        <input id="myCheckbox" type="checkbox" checked>
+        <input id="myCheckbox" type="checkbox" checked> Risk mode
 
       </div>
 
@@ -977,11 +977,11 @@ checkbox.addEventListener('change', (event) => {
 
         if (event.button === 2) {
 
-          room[y][x] = myVariable ? "F___" : "cont";
+          room[y][x] = myVariable ? "cont" : "F___";
 
           cell.style.background = "#F0F7FA";
 
-          cell.innerHTML = myVariable ? "" : `
+          cell.innerHTML = myVariable ? `
         <div style="
           position:absolute;
           inset:0;
@@ -999,7 +999,8 @@ checkbox.addEventListener('change', (event) => {
         ">
           ⬡
         </div>
-      `;
+      ` : "";
+
           cell.style.position = "";
           cell.style.overflow = "";
 
@@ -1023,11 +1024,11 @@ checkbox.addEventListener('change', (event) => {
 
         if (mouseDown && eraseMode) {
 
-          room[y][x] = myVariable ? "F___" : "cont";
+          room[y][x] = myVariable ? "cont" : "F___";
 
           cell.style.background = "#F0F7FA";
 
-          cell.innerHTML = myVariable ? "" : `
+          cell.innerHTML = myVariable ? `
         <div style="
           position:absolute;
           inset:0;
@@ -1045,7 +1046,7 @@ checkbox.addEventListener('change', (event) => {
         ">
           ⬡
         </div>
-      `;
+      ` : "";
 
           cell.style.position = "";
           cell.style.overflow = "";
@@ -1104,7 +1105,7 @@ checkbox.addEventListener('change', (event) => {
 
           } else {
 
-            room[y][x] = "cont";
+            room[y][x] = myVariable ? "cont" : "F___";
           }
         }
       }
