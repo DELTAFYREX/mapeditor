@@ -355,37 +355,37 @@
 
     <button class="toolButton"
             style="background: linear-gradient(90deg, red, orange, yellow, green, blue, purple);"
-            onclick="selectTile('dcf0', 'rainbow', this)">
+            onclick="selectTile('dcf0', 'dancefloor', this)">
       Rainbow
     </button>
 
     <button class="toolButton"
             style="background: blue;"
-            onclick="selectTile('dcf1', 'flashBlueRed', this)">
+            onclick="selectTile('dcf1', 'dancefloor1', this)">
       Blue/Red
     </button>
 
     <button class="toolButton"
             style="background: cyan;"
-            onclick="selectTile('dcf2', 'flashBlueGray', this)">
+            onclick="selectTile('dcf2', 'dancefloor2', this)">
       Blue/Gray
     </button>
 
     <button class="toolButton"
             style="background: lightblue;"
-            onclick="selectTile('dcf3', 'flashGreyBlue', this)">
+            onclick="selectTile('dcf3', 'dancefloor3', this)">
       Gray/Blue
     </button>
 
     <button class="toolButton"
             style="background: red;"
-            onclick="selectTile('dcf4', 'flashRedGrey', this)">
+            onclick="selectTile('dcf4', 'dancefloor4', this)">
       Red/Gray
     </button>
 
     <button class="toolButton"
             style="background: pink;"
-            onclick="selectTile('dcf5', 'flashGreyRed', this)">
+            onclick="selectTile('dcf5', 'dancefloor5', this)">
       Gray/Red
     </button>
 
@@ -798,12 +798,12 @@
 
           else if (tile === "roid") {
 
-            setControlPointTile(cell, "□");
+            setSoftPointTile(cell, "□");
           }
 
           else if (tile === "rock") {
 
-            setControlPointTile(cell, "▣");
+            setSoftPointTile(cell, "▣");
           }
 
           else if (tile === "blrd") {
@@ -897,12 +897,12 @@
 
           else if (currentTile === "roid") {
 
-            setControlPointTile(cell, "□");
+            setSoftPointTile(cell, "□");
           }
 
           else if (currentTile === "rock") {
 
-            setControlPointTile(cell, "▣");
+            setSoftPointTile(cell, "▣");
           }
 
           else if (currentTile === "blackroid") {
