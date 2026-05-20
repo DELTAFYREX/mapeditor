@@ -958,8 +958,8 @@ checkbox.addEventListener('change', (event) => {
 
             cell.innerHTML = "";
 
-            cell.style.position = "";
-            cell.style.overflow = "";
+          cell.style.position = myVariable ? "relative" : "";
+          cell.style.overflow = myVariable ? "hidden" : "";
 
             cell.style.background = currentColor;
           }
@@ -979,7 +979,7 @@ checkbox.addEventListener('change', (event) => {
 
           room[y][x] = myVariable ? "cont" : "F___";
 
-          cell.style = "background: rgb(240, 247, 250); position: relative; overflow: hidden;"
+          cell.style.background = "#F0F7FA";          
 
           cell.innerHTML = myVariable ? `
         <div style="
@@ -1001,8 +1001,8 @@ checkbox.addEventListener('change', (event) => {
         </div>
       ` : "";
 
-          cell.style.position = "";
-          cell.style.overflow = "";
+          cell.style.position = myVariable ? "relative" : "";
+          cell.style.overflow = myVariable ? "hidden" : "";
 
           return;
         }
@@ -1026,7 +1026,11 @@ checkbox.addEventListener('change', (event) => {
 
           room[y][x] = myVariable ? "cont" : "F___";
 
-          cell.style = "background: rgb(240, 247, 250); position: relative; overflow: hidden;"
+          cell.style.background = "#F0F7FA";
+                    
+          cell.style.position = "relative";
+
+          cell.style.overflow = "hidden";
 
           cell.innerHTML = myVariable ? `
         <div style="
