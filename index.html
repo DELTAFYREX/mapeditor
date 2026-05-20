@@ -13,40 +13,66 @@
       overflow: hidden;
     }
 
+    /* MAIN EDITOR AREA */
+    #editorArea {
+      flex: 1;
+
+      display: flex;
+      flex-direction: row;
+
+      align-items: flex-start;
+      justify-content: flex-start;
+
+      gap: 20px;
+
+      padding: 20px;
+
+      overflow: auto;
+    }
+
     /* LEFT SIDE */
-#editorArea {
-  flex: 1;
-
-  display: flex;
-  flex-direction: row;
-
-  align-items: flex-start;
-  justify-content: flex-start;
-
-  gap: 20px;
-
-  padding: 20px;
-
-  overflow: auto;
-}
+    #leftPanel {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
 
     /* GRID */
- #grid {
-  display: grid;
+    #grid {
+      display: grid;
 
-  /* Responsive sizing */
-  width: min(80vw, 80vh);
-  height: min(80vw, 80vh);
+      /* RESPONSIVE SIZE */
+      width: min(80vw, 80vh);
+      height: min(80vw, 80vh);
 
-  border: 2px solid black;
+      border: 2px solid black;
 
-  flex-shrink: 0;
-}
+      flex-shrink: 0;
+    }
 
     .cell {
       border: 1px solid #777;
       cursor: pointer;
       user-select: none;
+      box-sizing: border-box;
+    }
+
+    /* JSON PANEL */
+    #jsonPanel {
+      display: flex;
+      flex-direction: column;
+      width: 400px;
+    }
+
+    textarea {
+      width: 100%;
+      height: min(80vh, 700px);
+
+      font-family: monospace;
+      font-size: 14px;
+
+      resize: none;
+
       box-sizing: border-box;
     }
 
@@ -74,78 +100,48 @@
       outline: 4px solid yellow;
     }
 
-    textarea {
-      width: min(80vw, 80vh);
-      height: 180px;
-      font-family: monospace;
-      font-size: 14px;
-      resize: vertical;
-      flex-shrink: 0;
-    }
-#leftPanel {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-#jsonPanel {
-  display: flex;
-  flex-direction: column;
-  width: 400px;
-}
-
-textarea {
-  width: 100%;
-  height: min(80vh, 700px);
-
-  font-family: monospace;
-  font-size: 14px;
-
-  resize: none;
-
-  box-sizing: border-box;
-}
-
   </style>
 </head>
 <body>
 
-  <!-- LEFT SIDE -->
-<div id="editorArea">
+  <!-- MAIN EDITOR -->
+  <div id="editorArea">
 
-  <!-- LEFT SIDE -->
-  <div id="leftPanel">
+    <!-- LEFT SIDE -->
+    <div id="leftPanel">
 
-    <h1>Nero.io Map Editor</h1>
+      <h1>Nero.io Map Editor</h1>
 
-    <div>
-      Width:
-      <input type="number" id="widthInput" value="11" min="1">
+      <div>
+        Width:
+        <input type="number" id="widthInput" value="11" min="1">
 
-      Height:
-      <input type="number" id="heightInput" value="11" min="1">
+        Height:
+        <input type="number" id="heightInput" value="11" min="1">
 
-      <button onclick="createGrid()">Create Grid</button>
+        <button onclick="createGrid()">Create Grid</button>
 
-      <button onclick="generateJSON()">Generate JSON</button>
+        <button onclick="generateJSON()">Generate JSON</button>
+
+        <button onclick="importJSON()">Import JSON</button>
+      </div>
+
+      <div id="grid"></div>
+
     </div>
 
-    <div id="grid"></div>
+    <!-- JSON PANEL -->
+    <div id="jsonPanel">
+
+      <h2>Generated Map</h2>
+
+      <textarea id="output"></textarea>
+
+    </div>
 
   </div>
 
-  <!-- RIGHT SIDE -->
-  <div id="jsonPanel">
-
-    <h2>Generated Map</h2>
-
-    <textarea id="output"></textarea>
-
-  </div>
-
-</div>
-
-  <!-- RIGHT SIDE -->
+  <!-- TOOLBAR -->
   <div id="toolbar">
 
     <h2>Tiles</h2>
@@ -289,12 +285,12 @@ textarea {
 
           }
 
-          // CLICK
+          // SINGLE CLICK
           cell.addEventListener("mousedown", () => {
             paintTile(cell, x, y);
           });
 
-          // DRAG
+          // CLICK + DRAG
           cell.addEventListener("mouseover", () => {
 
             if (mouseDown) {
@@ -339,6 +335,84 @@ textarea {
       output += "];";
 
       document.getElementById("output").value = output;
+    }
+
+    // IMPORT JSON
+    function importJSON() {
+
+      try {
+
+        let text = document.getElementById("output").value;
+
+        // Remove room =
+        text = text.replace("room =", "").trim();
+
+        // Remove semicolon
+        text = text.replace(";", "");
+
+        // Add quotes around tile names
+        text = text.replace(/\b([a-zA-Z_]+)\b/g, '"$1"');
+
+        // Parse
+        const importedRoom = JSON.parse(text);
+
+        room = importedRoom;
+
+        const height = room.length;
+        const width = room[0].length;
+
+        // Update size inputs
+        document.getElementById("widthInput").value = width;
+        document.getElementById("heightInput").value = height;
+
+        const grid = document.getElementById("grid");
+
+        grid.innerHTML = "";
+
+        // GRID LAYOUT
+        grid.style.gridTemplateColumns = `repeat(${width}, 1fr)`;
+        grid.style.gridTemplateRows = `repeat(${height}, 1fr)`;
+
+        // REBUILD GRID
+        for (let y = 0; y < height; y++) {
+
+          for (let x = 0; x < width; x++) {
+
+            const cell = document.createElement("div");
+
+            cell.classList.add("cell");
+
+            const tile = room[y][x];
+
+            // Set tile color
+            cell.style.background =
+              tileColors[tile] || "magenta";
+
+            // Click paint
+            cell.addEventListener("mousedown", () => {
+              paintTile(cell, x, y);
+            });
+
+            // Drag paint
+            cell.addEventListener("mouseover", () => {
+
+              if (mouseDown) {
+                paintTile(cell, x, y);
+              }
+
+            });
+
+            grid.appendChild(cell);
+          }
+        }
+
+      } catch (error) {
+
+        alert("Invalid room data!");
+
+        console.error(error);
+
+      }
     }
 
     // START
