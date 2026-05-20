@@ -860,39 +860,59 @@
 
           const cell = cells[index];
 
-          if (currentTile === "teamBlueSpawn") {
+          if (currentTile === "sblu") {
 
             setSpawnTile(cell, "#CAE4F6");
           }
 
-          else if (currentTile === "teamRedSpawn") {
+          else if (currentTile === "sgre") {
 
             setSpawnTile(cell, "#F3CED1");
           }
 
-          else if (currentTile === "neutralSpawn") {
+          else if (currentTile === "cont") {
 
             setSpawnTile(cell, "#F0F7FA");
           }
 
-          else if (currentTile === "controlPoint1") {
+          else if (currentTile === "ucon") {
 
             setControlPointTile(cell, "1");
           }
 
-          else if (currentTile === "controlPoint2") {
+          else if (currentTile === "uco2") {
 
             setControlPointTile(cell, "2");
           }
 
-          else if (currentTile === "softPoint1") {
+          else if (currentTile === "UWAL") {
 
             setSoftPointTile(cell, "1");
           }
 
-          else if (currentTile === "softPoint2") {
+          else if (currentTile === "UWA2") {
 
             setSoftPointTile(cell, "2");
+          }
+
+          else if (currentTile === "roid") {
+
+            setControlPointTile(cell, "□");
+          }
+
+          else if (currentTile === "rock") {
+
+            setControlPointTile(cell, "▣");
+          }
+
+          else if (currentTile === "blackroid") {
+
+            setSoftPointTile(cell, "□");
+          }
+
+          else if (currentTile === "blackrock") {
+
+            setSoftPointTile(cell, "▣");
           }
 
           else {
