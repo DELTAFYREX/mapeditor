@@ -293,7 +293,7 @@
     let currentTile = "____";
     let currentColor = "white";
 
-    // DRAG PAINTING
+    // DRAG STATES
     let mouseDown = false;
     let eraseMode = false;
 
@@ -315,7 +315,6 @@
 
       mouseDown = true;
 
-      // RIGHT CLICK = ERASE
       eraseMode = (event.button === 2);
 
     });
@@ -330,7 +329,7 @@
 
     });
 
-    // DISABLE CONTEXT MENU
+    // DISABLE RIGHT CLICK MENU
     document.addEventListener("contextmenu", (event) => {
       event.preventDefault();
     });
@@ -353,23 +352,12 @@
     // PAINT TILE
     function paintTile(cell, x, y) {
 
-      // ERASE MODE
-      if (eraseMode) {
+      room[y][x] = currentTile;
 
-        room[y][x] = "____";
-
-        cell.style.background = "white";
-
-      } else {
-
-        room[y][x] = currentTile;
-
-        cell.style.background = currentColor;
-      }
-
+      cell.style.background = currentColor;
     }
 
-    // RECTANGLE FILL
+    // FILL RECTANGLE
     function fillRectangle(endX, endY) {
 
       if (!fillStart) return;
@@ -400,6 +388,80 @@
       }
     }
 
+    // ATTACH EVENTS TO CELL
+    function attachCellEvents(cell, x, y) {
+
+      // MOUSE DOWN
+      cell.addEventListener("mousedown", (event) => {
+
+        event.preventDefault();
+
+        // RIGHT CLICK ERASE
+        if (event.button === 2) {
+
+          room[y][x] = "____";
+
+          cell.style.background = "white";
+
+          return;
+        }
+
+        // SHIFT RECTANGLE FILL
+        if (event.shiftKey) {
+
+          fillStart = { x, y };
+
+        } else {
+
+          paintTile(cell, x, y);
+        }
+
+      });
+
+      // DRAG PAINT
+      cell.addEventListener("mouseover", (event) => {
+
+        event.preventDefault();
+
+        // RIGHT CLICK DRAG ERASE
+        if (mouseDown && eraseMode) {
+
+          room[y][x] = "____";
+
+          cell.style.background = "white";
+
+          return;
+        }
+
+        // RECTANGLE FILL
+        if (mouseDown && fillStart && event.shiftKey) {
+
+          fillRectangle(x, y);
+
+        }
+
+        // NORMAL DRAG PAINT
+        else if (mouseDown && !fillStart) {
+
+          paintTile(cell, x, y);
+        }
+
+      });
+
+      // RECTANGLE FILL END
+      cell.addEventListener("mouseup", (event) => {
+
+        if (fillStart && event.shiftKey) {
+
+          fillRectangle(x, y);
+
+          fillStart = null;
+        }
+
+      });
+
+    }
+
     // CREATE GRID
     function createGrid() {
 
@@ -412,11 +474,9 @@
 
       room = [];
 
-      // GRID SIZE
       grid.style.gridTemplateColumns = `repeat(${width}, 1fr)`;
       grid.style.gridTemplateRows = `repeat(${height}, 1fr)`;
 
-      // CREATE CELLS
       for (let y = 0; y < height; y++) {
 
         room[y] = [];
@@ -447,54 +507,7 @@
             cell.style.background = "white";
           }
 
-          // MOUSE DOWN
-          cell.addEventListener("mousedown", (event) => {
-
-            event.preventDefault();
-
-            // SHIFT = RECTANGLE FILL
-            if (event.shiftKey) {
-
-              fillStart = { x, y };
-
-            } else {
-
-              paintTile(cell, x, y);
-            }
-
-          });
-
-          // DRAG PAINT
-          cell.addEventListener("mouseover", (event) => {
-
-            event.preventDefault();
-
-            // RECTANGLE PREVIEW
-            if (mouseDown && fillStart && event.shiftKey) {
-
-              fillRectangle(x, y);
-
-            }
-
-            // NORMAL DRAG PAINT
-            else if (mouseDown && !fillStart) {
-
-              paintTile(cell, x, y);
-            }
-
-          });
-
-          // SHIFT RELEASE FILL
-          cell.addEventListener("mouseup", (event) => {
-
-            if (fillStart && event.shiftKey) {
-
-              fillRectangle(x, y);
-
-              fillStart = null;
-            }
-
-          });
+          attachCellEvents(cell, x, y);
 
           grid.appendChild(cell);
         }
@@ -577,51 +590,7 @@
             cell.style.background =
               tileColors[tile] || "magenta";
 
-            // MOUSE DOWN
-            cell.addEventListener("mousedown", (event) => {
-
-              event.preventDefault();
-
-              if (event.shiftKey) {
-
-                fillStart = { x, y };
-
-              } else {
-
-                paintTile(cell, x, y);
-              }
-
-            });
-
-            // DRAG PAINT
-            cell.addEventListener("mouseover", (event) => {
-
-              event.preventDefault();
-
-              if (mouseDown && fillStart && event.shiftKey) {
-
-                fillRectangle(x, y);
-
-              }
-
-              else if (mouseDown && !fillStart) {
-
-                paintTile(cell, x, y);
-              }
-
-            });
-
-            // RECTANGLE FILL
-            cell.addEventListener("mouseup", (event) => {
-
-              if (fillStart && event.shiftKey) {
-
-                fillRectangle(x, y);
-
-                fillStart = null;
-              }
-
-            });
+            attachCellEvents(cell, x, y);
 
             grid.appendChild(cell);
           }
