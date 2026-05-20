@@ -650,7 +650,6 @@
 
         function setSoftPointTileblack(cell, number, color) {
 
-      cell.style.background = color;
 
       cell.innerHTML = `
         <div style="
@@ -672,7 +671,7 @@
         </div>
       `;
 
-      cell.style.background = "black",
+      cell.style.background = color,
 
       cell.style.position = "relative";
 
