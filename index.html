@@ -361,31 +361,31 @@
 
     <button class="toolButton"
             style="background: blue;"
-            onclick="selectTile('dcf1', 'dancefloor1', this)">
+            onclick="selectTile('dcf1', 'flashBlueRed', this)">
       Blue/Red
     </button>
 
     <button class="toolButton"
             style="background: cyan;"
-            onclick="selectTile('dcf2', 'dancefloor2', this)">
+            onclick="selectTile('dcf2', 'flashBlueGray', this)">
       Blue/Gray
     </button>
 
     <button class="toolButton"
             style="background: lightblue;"
-            onclick="selectTile('dcf3', 'dancefloor3', this)">
+            onclick="selectTile('dcf3', 'flashGreyBlue', this)">
       Gray/Blue
     </button>
 
     <button class="toolButton"
             style="background: red;"
-            onclick="selectTile('dcf4', 'dancefloor4', this)">
+            onclick="selectTile('dcf4', 'flashRedGrey', this)">
       Red/Gray
     </button>
 
     <button class="toolButton"
             style="background: pink;"
-            onclick="selectTile('dcf5', 'dancefloor5', this)">
+            onclick="selectTile('dcf5', 'flashGreyRed', this)">
       Gray/Red
     </button>
 
@@ -459,15 +459,15 @@
 
       "dcf0": "rainbow",
 
-      "dcf1": "dancefloor1",
+      "dcf1": "flashBlueRed",
 
-      "dcf2": "dancefloor2",
+      "dcf2": "flashBlueGray",
 
-      "dcf3": "dancefloor3",
+      "dcf3": "flashGreyBlue",
 
-      "dcf4": "dancefloor4",
+      "dcf4": "flashRedGrey",
 
-      "dcf5": "dancefloor5",
+      "dcf5": "flashGreyRed",
     };
 
     function saveState() {
@@ -1129,7 +1129,7 @@
           if (!cell) continue;
 
           // RAINBOW
-          if (tile === "rainbow") {
+          if (tile === "dcf0") {
 
             const hue =
               (time / 10 + (x + y) * 20) % 360;
@@ -1139,7 +1139,7 @@
           }
 
           // BLUE / RED
-          else if (tile === "dancefloor1") {
+          else if (tile === "dcf1") {
 
             const flash =
               Math.sin(time / 150) > 0;
@@ -1149,7 +1149,7 @@
           }
 
           // BLUE / GRAY
-          else if (tile === "dancefloor2") {
+          else if (tile === "dcf2") {
 
             const flash =
               Math.sin(time / 150) > 0;
@@ -1159,7 +1159,7 @@
           }
 
           // GRAY / BLUE
-          else if (tile === "dancefloor3") {
+          else if (tile === "dcf3") {
 
             const flash =
               Math.sin(time / 150) > 0;
@@ -1169,7 +1169,7 @@
           }
 
           // RED / GRAY
-          else if (tile === "dancefloor4") {
+          else if (tile === "dcf4") {
 
             const flash =
               Math.sin(time / 150) > 0;
@@ -1179,7 +1179,7 @@
           }
 
           // GRAY / RED
-          else if (tile === "dancefloor5") {
+          else if (tile === "dcf5") {
 
             const flash =
               Math.sin(time / 150) > 0;
