@@ -16,76 +16,54 @@
       overflow: hidden;
     }
 
-    /* MAIN AREA */
     #editorArea {
       flex: 1;
-
       display: flex;
-
       padding: 20px;
       gap: 20px;
-
       overflow: hidden;
     }
 
-    /* LEFT SIDE */
     #leftPanel {
       flex: 1;
-
       display: flex;
       flex-direction: column;
-
       min-width: 0;
     }
 
-    /* CONTROLS */
     #controls {
       display: flex;
       flex-wrap: wrap;
-
       align-items: center;
-
       gap: 10px;
-
       margin-bottom: 15px;
     }
 
     #controls input {
       width: 70px;
-
       padding: 5px;
-
       font-size: 16px;
     }
 
     #controls button {
       padding: 8px 12px;
-
       font-size: 14px;
-
       cursor: pointer;
     }
 
-    /* MAIN CONTENT */
     #mainContent {
       flex: 1;
-
       display: flex;
-
       gap: 20px;
-
       min-height: 0;
     }
 
-    /* GRID SIDE */
     #gridContainer {
       display: flex;
-
       align-items: flex-start;
       justify-content: flex-start;
     }
 
-    /* GRID */
     #grid {
       display: grid;
 
@@ -101,16 +79,13 @@
 
     .cell {
       border: 1px solid #888;
-
       cursor: pointer;
-
       box-sizing: border-box;
 
       user-select: none;
       -webkit-user-drag: none;
     }
 
-    /* JSON PANEL */
     #jsonPanel {
       flex: 1;
 
@@ -126,7 +101,6 @@
       margin-bottom: 10px;
     }
 
-    /* JSON BOX */
     textarea {
       flex: 1;
 
@@ -142,9 +116,8 @@
       box-sizing: border-box;
     }
 
-    /* TOOLBAR */
     #toolbar {
-      width: 220px;
+      width: 240px;
 
       background: #222;
       color: white;
@@ -191,15 +164,12 @@
 </head>
 <body>
 
-  <!-- MAIN EDITOR -->
   <div id="editorArea">
 
-    <!-- LEFT PANEL -->
     <div id="leftPanel">
 
       <h1>Nero.io Map Editor</h1>
 
-      <!-- CONTROLS -->
       <div id="controls">
 
         <label>
@@ -220,15 +190,12 @@
 
       </div>
 
-      <!-- MAIN CONTENT -->
       <div id="mainContent">
 
-        <!-- GRID -->
         <div id="gridContainer">
           <div id="grid"></div>
         </div>
 
-        <!-- JSON -->
         <div id="jsonPanel">
 
           <h2>Generated Map</h2>
@@ -282,6 +249,13 @@
             style="background:orange;"
             onclick="selectTile('lava', 'orange', this)">
       Lava
+    </button>
+
+    <!-- TEAM BLUE SPAWN -->
+    <button class="toolButton"
+            style="background:#4da6ff; color:white;"
+            onclick="selectTile('teamBlueSpawn', 'teamBlueSpawn', this)">
+      ⬡ Blue Spawn
     </button>
 
     <!-- ANIMATED TILES -->
@@ -352,6 +326,8 @@
       "water": "blue",
       "nest": "purple",
       "lava": "orange",
+
+      "teamBlueSpawn": "teamBlueSpawn",
 
       "dancefloor": "rainbow",
       "dancefloor1": "flashBlueRed",
@@ -460,6 +436,28 @@
 
       room[y][x] = currentTile;
 
+      // TEAM BLUE SPAWN
+      if (currentTile === "teamBlueSpawn") {
+
+        cell.style.background = "#4da6ff";
+
+        cell.innerHTML = "⬡";
+
+        cell.style.display = "flex";
+        cell.style.alignItems = "center";
+        cell.style.justifyContent = "center";
+
+        cell.style.fontSize = "22px";
+        cell.style.fontWeight = "bold";
+
+        cell.style.color = "white";
+
+        return;
+      }
+
+      // NORMAL TILES
+      cell.innerHTML = "";
+
       cell.style.background = currentColor;
     }
 
@@ -488,8 +486,32 @@
 
           const color = tileColors[tile] || "magenta";
 
-          if (!color.includes("flash") && color !== "rainbow") {
+          // TEAM BLUE SPAWN
+          if (tile === "teamBlueSpawn") {
+
+            cell.style.background = "#4da6ff";
+
+            cell.innerHTML = "⬡";
+
+            cell.style.display = "flex";
+            cell.style.alignItems = "center";
+            cell.style.justifyContent = "center";
+
+            cell.style.fontSize = "22px";
+            cell.style.fontWeight = "bold";
+
+            cell.style.color = "white";
+          }
+
+          // NORMAL STATIC TILES
+          else if (
+            !color.includes("flash") &&
+            color !== "rainbow"
+          ) {
+
             cell.style.background = color;
+
+            cell.innerHTML = "";
           }
 
           attachCellEvents(cell, x, y);
@@ -525,7 +547,29 @@
 
           const index = y * width + x;
 
-          cells[index].style.background = currentColor;
+          const cell = cells[index];
+
+          if (currentTile === "teamBlueSpawn") {
+
+            cell.style.background = "#4da6ff";
+
+            cell.innerHTML = "⬡";
+
+            cell.style.display = "flex";
+            cell.style.alignItems = "center";
+            cell.style.justifyContent = "center";
+
+            cell.style.fontSize = "22px";
+            cell.style.fontWeight = "bold";
+
+            cell.style.color = "white";
+
+          } else {
+
+            cell.innerHTML = "";
+
+            cell.style.background = currentColor;
+          }
         }
       }
     }
@@ -546,6 +590,8 @@
           room[y][x] = "____";
 
           cell.style.background = "white";
+
+          cell.innerHTML = "";
 
           return;
         }
@@ -573,6 +619,8 @@
           room[y][x] = "____";
 
           cell.style.background = "white";
+
+          cell.innerHTML = "";
 
           return;
         }
