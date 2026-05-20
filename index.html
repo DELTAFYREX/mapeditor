@@ -212,13 +212,13 @@
   <!-- TOOLBAR -->
   <div id="toolbar">
 
-    <h2>Tiles</h2>
+    <h2>Risk Tiles</h2>
 
-    <!-- EMPTY -->
-    <button class="toolButton selectedTool"
+    <!-- Capture Point -->
+    <button class="toolButton"
             style="background:#F0F7FA; color:black;"
-            onclick="selectTile('____', '#F0F7FA', this)">
-      Empty
+            onclick="selectTile('cont', 'neutralSpawn', this)">
+      ⬡ Capture Point
     </button>
 
     <!-- WALL -->
@@ -228,17 +228,29 @@
       Wall
     </button>
 
-    <!-- TREE -->
+    <!-- FOOD -->
     <button class="toolButton"
-            style="background:green;"
-            onclick="selectTile('tree', 'green', this)">
-      Tree
+            style="background:#f0f4c5;"
+            onclick="selectTile('____', '#f0f4c5', this)">
+      Food
+    </button>
+
+    <button class="toolButton"
+            style="background: #bababa;"
+            onclick="selectTile('roid', 'roidtile', this)">
+      □ Mini Rock
+    </button>
+
+    <button class="toolButton"
+            style="background: #bababa;"
+            onclick="selectTile('rock', 'rocktile', this)">
+      ▣ Rock
     </button>
 
     <!-- WATER -->
     <button class="toolButton"
-            style="background:blue;"
-            onclick="selectTile('water', 'blue', this)">
+            style="background:#7efff0;"
+            onclick="selectTile('watr', '#7efff0', this)">
       Water
     </button>
 
@@ -249,98 +261,139 @@
       Nest
     </button>
 
-    <!-- LAVA -->
-    <button class="toolButton"
-            style="background:orange;"
-            onclick="selectTile('lava', 'orange', this)">
-      Lava
-    </button>
-
     <!-- BLUE SPAWN -->
     <button class="toolButton"
             style="background:#CAE4F6; color:black;"
-            onclick="selectTile('teamBlueSpawn', 'teamBlueSpawn', this)">
+            onclick="selectTile('sblu', 'teamBlueSpawn', this)">
       ⬡ Blue Spawn
     </button>
 
     <!-- RED SPAWN -->
     <button class="toolButton"
             style="background:#F3CED1; color:black;"
-            onclick="selectTile('teamRedSpawn', 'teamRedSpawn', this)">
+            onclick="selectTile('sgre', 'teamRedSpawn', this)">
       ⬡ Red Spawn
     </button>
 
-    <!-- NEUTRAL SPAWN -->
-    <button class="toolButton"
-            style="background:#F0F7FA; color:black;"
-            onclick="selectTile('neutralSpawn', 'neutralSpawn', this)">
-      ⬡ Neutral Spawn
-    </button>
-
-    <!-- CONTROL POINT 1 -->
+    <!-- gate POINT 1 -->
     <button class="toolButton"
             style="background: linear-gradient(90deg, #f6dede, #F0F7FA, #dcecf8); color:black;"
-            onclick="selectTile('controlPoint1', 'controlPoint1', this)">
-      1 Control Point
+            onclick="selectTile('ucon', 'controlPoint1', this)">
+      Gate Switch
     </button>
 
-    <!-- CONTROL POINT 2 -->
+    <!-- gate wall 1 -->
+    <button class="toolButton"
+            style="background:#cacacb; color:black;"
+            onclick="selectTile('UWAL', 'softPoint1', this)">
+      Gate Wall
+    </button>
+
+    <!-- Gater POINT 2 -->
     <button class="toolButton"
             style="background: linear-gradient(90deg, #f6dede, #F0F7FA, #dcecf8); color:black;"
-            onclick="selectTile('controlPoint2', 'controlPoint2', this)">
-      2 Control Point
+            onclick="selectTile('uco2', 'controlPoint2', this)">
+      Gate Switch 2
     </button>
 
-    <!-- SOFT POINT 1 -->
+    <!-- gate wall 2 -->
     <button class="toolButton"
             style="background:#cacacb; color:black;"
-            onclick="selectTile('softPoint1', 'softPoint1', this)">
-      1 Soft Point
+            onclick="selectTile('UWA2', 'softPoint2', this)">
+      Gate Wall 2
     </button>
 
-    <!-- SOFT POINT 2 -->
+    <!-- PORTAL -->
     <button class="toolButton"
-            style="background:#cacacb; color:black;"
-            onclick="selectTile('softPoint2', 'softPoint2', this)">
-      2 Soft Point
+            style="background:#5f5f5f; color:black;"
+            onclick="selectTile('port', '#5f5f5f', this)">
+      Gate Wall 2
     </button>
+
+    <!-- Trench 1 -->
+    <button class="toolButton"
+            style="background:#c4d7e4; color:black;"
+            onclick="selectTile('t1tr', '#c4d7e4', this)">
+      Blue Trench
+    </button>
+
+    <!-- Trench2  -->
+    <button class="toolButton"
+            style="background:#e5c8cb; color:black;"
+            onclick="selectTile('t2tr', '#e5c8cb', this)">
+      Red Trench
+    </button>
+
+    <h2>Other Tiles</h2>
 
     <!-- ANIMATED TILES -->
+    
+    <!-- Speed -->
+    <button class="toolButton"
+            style="background:#ffbf7e;"
+            onclick="selectTile('sped', '#ffbf7e', this)">
+      Speed
+    </button>
+
+    <button class="toolButton"
+            style="background: black;"
+            onclick="selectTile('blat', 'black', this)">
+      Black Tile
+    </button>
+
+    <button class="toolButton"
+            style="background: black;"
+            onclick="selectTile('blrd', 'blackroid', this)">
+      □ Black Mini Rock Tile
+    </button>
+
+    <button class="toolButton"
+            style="background: black;"
+            onclick="selectTile('blrk', 'blackrock', this)">
+      ▣ Black Rock Tile
+    </button>
 
     <button class="toolButton"
             style="background: linear-gradient(90deg, red, orange, yellow, green, blue, purple);"
-            onclick="selectTile('dancefloor', 'rainbow', this)">
+            onclick="selectTile('dcf0', 'rainbow', this)">
       Rainbow
     </button>
 
     <button class="toolButton"
             style="background: blue;"
-            onclick="selectTile('dancefloor1', 'flashBlueRed', this)">
+            onclick="selectTile('dcf1', 'flashBlueRed', this)">
       Blue/Red
     </button>
 
     <button class="toolButton"
             style="background: cyan;"
-            onclick="selectTile('dancefloor2', 'flashBlueGray', this)">
+            onclick="selectTile('dcf2', 'flashBlueGray', this)">
       Blue/Gray
     </button>
 
     <button class="toolButton"
             style="background: lightblue;"
-            onclick="selectTile('dancefloor3', 'flashGreyBlue', this)">
+            onclick="selectTile('dcf3', 'flashGreyBlue', this)">
       Gray/Blue
     </button>
 
     <button class="toolButton"
             style="background: red;"
-            onclick="selectTile('dancefloor4', 'flashRedGrey', this)">
+            onclick="selectTile('dcf4', 'flashRedGrey', this)">
       Red/Gray
     </button>
 
     <button class="toolButton"
             style="background: pink;"
-            onclick="selectTile('dancefloor5', 'flashGreyRed', this)">
+            onclick="selectTile('dcf5', 'flashGreyRed', this)">
       Gray/Red
+    </button>
+
+    <!-- EMPTY -->
+    <button class="toolButton selectedTool"
+            style="background:#F0F7FA; color:black;"
+            onclick="selectTile('F___', '#F0F7FA', this)">
+      Empty
     </button>
 
   </div>
@@ -349,7 +402,7 @@
 
     let room = [];
 
-    let currentTile = "____";
+    let currentTile = "F___";
     let currentColor = "#F0F7FA";
 
     let mouseDown = false;
@@ -362,43 +415,59 @@
 
     const tileColors = {
 
-      "____": "#F0F7FA",
+      "F___": "#F0F7FA",
 
       "wall": "#959597",
 
-      "tree": "green",
+      "____": "#f0f4c5",
 
-      "water": "blue",
+      "roid": "roidtile",
+
+      "rock": "rocktile",
+
+      "watr": "#7efff0",
 
       "nest": "#E0E1F4",
 
-      "lava": "orange",
+      "sped": "#ffbf7e",
 
-      "teamBlueSpawn": "teamBlueSpawn",
+      "sblu": "teamBlueSpawn",
 
-      "teamRedSpawn": "teamRedSpawn",
+      "sgre": "teamRedSpawn",
 
-      "neutralSpawn": "neutralSpawn",
+      "cont": "neutralSpawn",
 
-      "controlPoint1": "controlPoint1",
+      "ucon": "controlPoint1",
 
-      "controlPoint2": "controlPoint2",
+      "uco2": "controlPoint2",
 
-      "softPoint1": "softPoint1",
+      "UWAL": "softPoint1",
 
-      "softPoint2": "softPoint2",
+      "UWA2": "softPoint2",
 
-      "dancefloor": "rainbow",
+      "port": "#5f5f5f",
 
-      "dancefloor1": "flashBlueRed",
+      "t1tr": "#e5c8cb",
 
-      "dancefloor2": "flashBlueGray",
+      "t2tr": "#c4d7e4",
 
-      "dancefloor3": "flashGreyBlue",
+      "blat": "#000000",
 
-      "dancefloor4": "flashRedGrey",
+      "blrd": "blackroid",
 
-      "dancefloor5": "flashGreyRed",
+      "blrk": "blackrock",
+
+      "dcf0": "dancefloor",
+
+      "dcf1": "dancefloor1",
+
+      "dcf2": "dancefloor2",
+
+      "dcf3": "dancefloor3",
+
+      "dcf4": "dancefloor4",
+
+      "dcf5": "dancefloor5",
     };
 
     function saveState() {
@@ -506,7 +575,7 @@
           font-size:65%;
           font-weight:bold;
 
-          color:white;
+          color:black;
         ">
           ⬡
         </div>
@@ -632,6 +701,34 @@
         return;
       }
 
+      if (currentTile === "roidtile") {
+
+        setSoftPointTile(cell, "□");
+
+        return;
+      }
+
+      if (currentTile === "rocktile") {
+
+        setSoftPointTile(cell, "▣");
+
+        return;
+      }
+
+      if (currentTile === "blackroid") {
+
+        setSoftPointTile(cell, "□");
+
+        return;
+      }
+
+      if (currentTile === "blackrock") {
+
+        setSoftPointTile(cell, "▣");
+
+        return;
+      }
+
       cell.innerHTML = "";
 
       cell.style.position = "";
@@ -697,6 +794,26 @@
           else if (tile === "softPoint2") {
 
             setSoftPointTile(cell, "2");
+          }
+
+          else if (tile === "roidtile") {
+
+            setControlPointTile(cell, "□");
+          }
+
+          else if (tile === "rocktile") {
+
+            setControlPointTile(cell, "▣");
+          }
+
+          else if (tile === "blackroid") {
+
+            setSoftPointTile(cell, "□");
+          }
+
+          else if (tile === "blackrock") {
+
+            setSoftPointTile(cell, "▣");
           }
 
           else if (
@@ -893,7 +1010,7 @@
 
           } else {
 
-            room[y][x] = "____";
+            room[y][x] = "cont";
           }
         }
       }
