@@ -105,6 +105,9 @@
       cursor: pointer;
 
       box-sizing: border-box;
+
+      user-select: none;
+      -webkit-user-drag: none;
     }
 
     /* JSON PANEL */
@@ -292,6 +295,10 @@
 
     // DRAG PAINTING
     let mouseDown = false;
+    let eraseMode = false;
+
+    // RECTANGLE FILL
+    let fillStart = null;
 
     // TILE COLORS
     const tileColors = {
@@ -304,12 +311,28 @@
     };
 
     // TRACK MOUSE
-    document.body.addEventListener("mousedown", () => {
+    document.body.addEventListener("mousedown", (event) => {
+
       mouseDown = true;
+
+      // RIGHT CLICK = ERASE
+      eraseMode = (event.button === 2);
+
     });
 
     document.body.addEventListener("mouseup", () => {
+
       mouseDown = false;
+
+      eraseMode = false;
+
+      fillStart = null;
+
+    });
+
+    // DISABLE CONTEXT MENU
+    document.addEventListener("contextmenu", (event) => {
+      event.preventDefault();
     });
 
     // SELECT TILE
@@ -330,9 +353,51 @@
     // PAINT TILE
     function paintTile(cell, x, y) {
 
-      room[y][x] = currentTile;
+      // ERASE MODE
+      if (eraseMode) {
 
-      cell.style.background = currentColor;
+        room[y][x] = "____";
+
+        cell.style.background = "white";
+
+      } else {
+
+        room[y][x] = currentTile;
+
+        cell.style.background = currentColor;
+      }
+
+    }
+
+    // RECTANGLE FILL
+    function fillRectangle(endX, endY) {
+
+      if (!fillStart) return;
+
+      const startX = fillStart.x;
+      const startY = fillStart.y;
+
+      const minX = Math.min(startX, endX);
+      const maxX = Math.max(startX, endX);
+
+      const minY = Math.min(startY, endY);
+      const maxY = Math.max(startY, endY);
+
+      const cells = document.querySelectorAll(".cell");
+
+      const width = room[0].length;
+
+      for (let y = minY; y <= maxY; y++) {
+
+        for (let x = minX; x <= maxX; x++) {
+
+          room[y][x] = currentTile;
+
+          const index = y * width + x;
+
+          cells[index].style.background = currentColor;
+        }
+      }
     }
 
     // CREATE GRID
@@ -382,16 +447,51 @@
             cell.style.background = "white";
           }
 
-          // CLICK
-          cell.addEventListener("mousedown", () => {
-            paintTile(cell, x, y);
+          // MOUSE DOWN
+          cell.addEventListener("mousedown", (event) => {
+
+            event.preventDefault();
+
+            // SHIFT = RECTANGLE FILL
+            if (event.shiftKey) {
+
+              fillStart = { x, y };
+
+            } else {
+
+              paintTile(cell, x, y);
+            }
+
           });
 
           // DRAG PAINT
-          cell.addEventListener("mouseover", () => {
+          cell.addEventListener("mouseover", (event) => {
 
-            if (mouseDown) {
+            event.preventDefault();
+
+            // RECTANGLE PREVIEW
+            if (mouseDown && fillStart && event.shiftKey) {
+
+              fillRectangle(x, y);
+
+            }
+
+            // NORMAL DRAG PAINT
+            else if (mouseDown && !fillStart) {
+
               paintTile(cell, x, y);
+            }
+
+          });
+
+          // SHIFT RELEASE FILL
+          cell.addEventListener("mouseup", (event) => {
+
+            if (fillStart && event.shiftKey) {
+
+              fillRectangle(x, y);
+
+              fillStart = null;
             }
 
           });
@@ -441,16 +541,12 @@
 
         let text = document.getElementById("output").value;
 
-        // REMOVE "room ="
         text = text.replace("room =", "").trim();
 
-        // REMOVE SEMICOLON
         text = text.replace(";", "");
 
-        // ADD QUOTES
         text = text.replace(/\b([a-zA-Z_]+)\b/g, '"$1"');
 
-        // PARSE
         const importedRoom = JSON.parse(text);
 
         room = importedRoom;
@@ -458,7 +554,6 @@
         const height = room.length;
         const width = room[0].length;
 
-        // UPDATE INPUTS
         document.getElementById("widthInput").value = width;
         document.getElementById("heightInput").value = height;
 
@@ -466,11 +561,9 @@
 
         grid.innerHTML = "";
 
-        // GRID SIZE
         grid.style.gridTemplateColumns = `repeat(${width}, 1fr)`;
         grid.style.gridTemplateRows = `repeat(${height}, 1fr)`;
 
-        // REBUILD GRID
         for (let y = 0; y < height; y++) {
 
           for (let x = 0; x < width; x++) {
@@ -481,20 +574,51 @@
 
             const tile = room[y][x];
 
-            // TILE COLOR
             cell.style.background =
               tileColors[tile] || "magenta";
 
-            // CLICK
-            cell.addEventListener("mousedown", () => {
-              paintTile(cell, x, y);
+            // MOUSE DOWN
+            cell.addEventListener("mousedown", (event) => {
+
+              event.preventDefault();
+
+              if (event.shiftKey) {
+
+                fillStart = { x, y };
+
+              } else {
+
+                paintTile(cell, x, y);
+              }
+
             });
 
             // DRAG PAINT
-            cell.addEventListener("mouseover", () => {
+            cell.addEventListener("mouseover", (event) => {
 
-              if (mouseDown) {
+              event.preventDefault();
+
+              if (mouseDown && fillStart && event.shiftKey) {
+
+                fillRectangle(x, y);
+
+              }
+
+              else if (mouseDown && !fillStart) {
+
                 paintTile(cell, x, y);
+              }
+
+            });
+
+            // RECTANGLE FILL
+            cell.addEventListener("mouseup", (event) => {
+
+              if (fillStart && event.shiftKey) {
+
+                fillRectangle(x, y);
+
+                fillStart = null;
               }
 
             });
@@ -516,6 +640,5 @@
     createGrid();
 
   </script>
-
 </body>
 </html>
