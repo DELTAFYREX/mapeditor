@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Interactive Grid</title>
+  <title>Custom Grid</title>
 
   <style>
     body {
@@ -15,8 +15,8 @@
 
     #grid {
       display: grid;
-      width: 500px;
-      height: 500px;
+      width: 600px;
+      height: 600px;
       border: 2px solid black;
     }
 
@@ -26,17 +26,21 @@
     }
 
     .active {
-      background-color: cornflowerblue;
+      background-color: tomato;
     }
   </style>
 </head>
 <body>
 
-  <h1>Grid Generator</h1>
+  <h1>Custom Grid Generator</h1>
 
   <div>
-    Grid Size:
-    <input type="number" id="sizeInput" value="10" min="1" max="100">
+    Width:
+    <input type="number" id="widthInput" value="10" min="1">
+
+    Height:
+    <input type="number" id="heightInput" value="10" min="1">
+
     <button onclick="createGrid()">Create Grid</button>
   </div>
 
@@ -48,25 +52,31 @@
     let clickedCount = 0;
 
     function createGrid() {
-      const size = document.getElementById("sizeInput").value;
+
+      const width = parseInt(document.getElementById("widthInput").value);
+      const height = parseInt(document.getElementById("heightInput").value);
+
       const grid = document.getElementById("grid");
 
-      // Clear old grid
+      // Reset grid
       grid.innerHTML = "";
+      clickedCount = 0;
+      document.getElementById("counter").textContent = clickedCount;
 
-      // Set rows and columns
-      grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
-      grid.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+      // Create columns and rows
+      grid.style.gridTemplateColumns = `repeat(${width}, 1fr)`;
+      grid.style.gridTemplateRows = `repeat(${height}, 1fr)`;
 
-      // Create cells
-      for (let i = 0; i < size * size; i++) {
+      // Total cells
+      const totalCells = width * height;
+
+      for (let i = 0; i < totalCells; i++) {
+
         const cell = document.createElement("div");
         cell.classList.add("cell");
 
-        // Click behavior
         cell.addEventListener("click", () => {
 
-          // Toggle color
           if (!cell.classList.contains("active")) {
             cell.classList.add("active");
             clickedCount++;
@@ -75,7 +85,6 @@
             clickedCount--;
           }
 
-          // Update variable display
           document.getElementById("counter").textContent = clickedCount;
         });
 
@@ -83,7 +92,7 @@
       }
     }
 
-    // Make default grid
+    // Create starting grid
     createGrid();
   </script>
 
