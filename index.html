@@ -5,180 +5,182 @@
 
   <style>
 
- body {
-  margin: 0;
-  font-family: Arial;
-  background: #ececec;
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: #ececec;
 
-  display: flex;
-  height: 100vh;
-  overflow: hidden;
-}
+      display: flex;
+      height: 100vh;
 
-/* MAIN AREA */
-#editorArea {
-  flex: 1;
+      overflow: hidden;
+    }
 
-  display: flex;
+    /* MAIN AREA */
+    #editorArea {
+      flex: 1;
 
-  padding: 20px;
-  gap: 20px;
+      display: flex;
 
-  overflow: hidden;
-}
+      padding: 20px;
+      gap: 20px;
 
-/* LEFT SIDE */
-#leftPanel {
-  flex: 1;
+      overflow: hidden;
+    }
 
-  display: flex;
-  flex-direction: column;
+    /* LEFT SIDE */
+    #leftPanel {
+      flex: 1;
 
-  min-width: 0;
-}
+      display: flex;
+      flex-direction: column;
 
-/* CONTROLS */
-#controls {
-  display: flex;
-  flex-wrap: wrap;
+      min-width: 0;
+    }
 
-  align-items: center;
+    /* CONTROLS */
+    #controls {
+      display: flex;
+      flex-wrap: wrap;
 
-  gap: 10px;
+      align-items: center;
 
-  margin-bottom: 15px;
-}
+      gap: 10px;
 
-#controls input {
-  width: 70px;
+      margin-bottom: 15px;
+    }
 
-  padding: 5px;
+    #controls input {
+      width: 70px;
 
-  font-size: 16px;
-}
+      padding: 5px;
 
-#controls button {
-  padding: 8px 12px;
+      font-size: 16px;
+    }
 
-  font-size: 14px;
+    #controls button {
+      padding: 8px 12px;
 
-  cursor: pointer;
-}
+      font-size: 14px;
 
-/* MAIN CONTENT AREA */
-#mainContent {
-  flex: 1;
+      cursor: pointer;
+    }
 
-  display: flex;
+    /* MAIN CONTENT */
+    #mainContent {
+      flex: 1;
 
-  gap: 20px;
+      display: flex;
 
-  min-height: 0;
-}
+      gap: 20px;
 
-/* GRID SIDE */
-#gridContainer {
-  display: flex;
+      min-height: 0;
+    }
 
-  align-items: flex-start;
-  justify-content: flex-start;
-}
+    /* GRID SIDE */
+    #gridContainer {
+      display: flex;
 
-/* GRID */
-#grid {
-  display: grid;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
 
-  width: min(65vw, calc(100vh - 160px));
-  height: min(65vw, calc(100vh - 160px));
+    /* GRID */
+    #grid {
+      display: grid;
 
-  background: white;
+      width: min(65vw, calc(100vh - 160px));
+      height: min(65vw, calc(100vh - 160px));
 
-  border: 2px solid black;
+      background: white;
 
-  flex-shrink: 0;
-}
+      border: 2px solid black;
 
-.cell {
-  border: 1px solid #888;
+      flex-shrink: 0;
+    }
 
-  cursor: pointer;
+    .cell {
+      border: 1px solid #888;
 
-  box-sizing: border-box;
-}
+      cursor: pointer;
 
-/* JSON SIDE */
-#jsonPanel {
-  flex: 1;
+      box-sizing: border-box;
+    }
 
-  display: flex;
-  flex-direction: column;
+    /* JSON PANEL */
+    #jsonPanel {
+      flex: 1;
 
-  min-width: 250px;
-  min-height: 0;
-}
+      display: flex;
+      flex-direction: column;
 
-#jsonPanel h2 {
-  margin-top: 0;
-  margin-bottom: 10px;
-}
+      min-width: 250px;
+      min-height: 0;
+    }
 
-/* JSON BOX */
-textarea {
-  flex: 1;
+    #jsonPanel h2 {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
 
-  width: 100%;
+    /* JSON BOX */
+    textarea {
+      flex: 1;
 
-  font-family: monospace;
-  font-size: 14px;
+      width: 100%;
 
-  resize: none;
+      font-family: monospace;
+      font-size: 14px;
 
-  padding: 10px;
+      resize: none;
 
-  box-sizing: border-box;
-}
+      padding: 10px;
 
-/* TOOLBAR */
-#toolbar {
-  width: 220px;
+      box-sizing: border-box;
+    }
 
-  background: #222;
-  color: white;
+    /* TOOLBAR */
+    #toolbar {
+      width: 220px;
 
-  padding: 20px;
+      background: #222;
+      color: white;
 
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+      padding: 20px;
 
-  flex-shrink: 0;
-}
+      display: flex;
+      flex-direction: column;
 
-#toolbar h2 {
-  margin-top: 0;
-}
+      gap: 12px;
 
-.toolButton {
-  padding: 14px;
+      flex-shrink: 0;
+    }
 
-  border: none;
-  border-radius: 10px;
+    #toolbar h2 {
+      margin-top: 0;
+    }
 
-  cursor: pointer;
+    .toolButton {
+      padding: 14px;
 
-  font-size: 18px;
-  font-weight: bold;
+      border: none;
+      border-radius: 10px;
 
-  transition: transform 0.1s;
-}
+      cursor: pointer;
 
-.toolButton:hover {
-  transform: scale(1.03);
-}
+      font-size: 18px;
+      font-weight: bold;
 
-.selectedTool {
-  outline: 4px solid yellow;
-}
+      transition: transform 0.1s;
+    }
+
+    .toolButton:hover {
+      transform: scale(1.03);
+    }
+
+    .selectedTool {
+      outline: 4px solid yellow;
+    }
 
   </style>
 </head>
@@ -187,48 +189,54 @@ textarea {
   <!-- MAIN EDITOR -->
   <div id="editorArea">
 
-    <!-- LEFT SIDE -->
+    <!-- LEFT PANEL -->
     <div id="leftPanel">
 
       <h1>Nero.io Map Editor</h1>
 
-<div id="controls">
+      <!-- CONTROLS -->
+      <div id="controls">
 
-  <label>
-    Width:
-    <input type="number" id="widthInput" value="11" min="1">
-  </label>
+        <label>
+          Width:
+          <input type="number" id="widthInput" value="11" min="1">
+        </label>
 
-  <label>
-    Height:
-    <input type="number" id="heightInput" value="11" min="1">
-  </label>
+        <label>
+          Height:
+          <input type="number" id="heightInput" value="11" min="1">
+        </label>
 
-  <button onclick="createGrid()">Create Grid</button>
+        <button onclick="createGrid()">Create Grid</button>
 
-  <button onclick="generateJSON()">Generate JSON</button>
+        <button onclick="generateJSON()">Generate JSON</button>
 
-  <button onclick="importJSON()">Import JSON</button>
+        <button onclick="importJSON()">Import JSON</button>
 
-</div>
+      </div>
 
-<div id="mainContent">
+      <!-- MAIN CONTENT -->
+      <div id="mainContent">
 
-  <!-- GRID -->
-  <div id="gridContainer"></div>
-    <div id="grid"></div>
+        <!-- GRID -->
+        <div id="gridContainer">
+          <div id="grid"></div>
+        </div>
+
+        <!-- JSON -->
+        <div id="jsonPanel">
+
+          <h2>Generated Map</h2>
+
+          <textarea id="output"></textarea>
+
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
-
-  <!-- JSON -->
-  <div id="jsonPanel">
-
-    <h2>Generated Map</h2>
-
-    <textarea id="output"></textarea>
-
-  </div>
-
-</div>
 
   <!-- TOOLBAR -->
   <div id="toolbar">
@@ -339,7 +347,7 @@ textarea {
 
       room = [];
 
-      // GRID LAYOUT
+      // GRID SIZE
       grid.style.gridTemplateColumns = `repeat(${width}, 1fr)`;
       grid.style.gridTemplateRows = `repeat(${height}, 1fr)`;
 
@@ -354,32 +362,32 @@ textarea {
 
           cell.classList.add("cell");
 
-          // BORDER CHECK
+          // BORDER WALLS
           const isBorder =
             x === 0 ||
             y === 0 ||
             x === width - 1 ||
             y === height - 1;
 
-          // OUTER WALLS
           if (isBorder) {
 
             room[y][x] = "wall";
+
             cell.style.background = "gray";
 
           } else {
 
             room[y][x] = "____";
-            cell.style.background = "white";
 
+            cell.style.background = "white";
           }
 
-          // SINGLE CLICK
+          // CLICK
           cell.addEventListener("mousedown", () => {
             paintTile(cell, x, y);
           });
 
-          // CLICK + DRAG
+          // DRAG PAINT
           cell.addEventListener("mouseover", () => {
 
             if (mouseDown) {
@@ -433,16 +441,16 @@ textarea {
 
         let text = document.getElementById("output").value;
 
-        // Remove room =
+        // REMOVE "room ="
         text = text.replace("room =", "").trim();
 
-        // Remove semicolon
+        // REMOVE SEMICOLON
         text = text.replace(";", "");
 
-        // Add quotes around tile names
+        // ADD QUOTES
         text = text.replace(/\b([a-zA-Z_]+)\b/g, '"$1"');
 
-        // Parse
+        // PARSE
         const importedRoom = JSON.parse(text);
 
         room = importedRoom;
@@ -450,7 +458,7 @@ textarea {
         const height = room.length;
         const width = room[0].length;
 
-        // Update size inputs
+        // UPDATE INPUTS
         document.getElementById("widthInput").value = width;
         document.getElementById("heightInput").value = height;
 
@@ -458,7 +466,7 @@ textarea {
 
         grid.innerHTML = "";
 
-        // GRID LAYOUT
+        // GRID SIZE
         grid.style.gridTemplateColumns = `repeat(${width}, 1fr)`;
         grid.style.gridTemplateRows = `repeat(${height}, 1fr)`;
 
@@ -473,16 +481,16 @@ textarea {
 
             const tile = room[y][x];
 
-            // Set tile color
+            // TILE COLOR
             cell.style.background =
               tileColors[tile] || "magenta";
 
-            // Click paint
+            // CLICK
             cell.addEventListener("mousedown", () => {
               paintTile(cell, x, y);
             });
 
-            // Drag paint
+            // DRAG PAINT
             cell.addEventListener("mouseover", () => {
 
               if (mouseDown) {
