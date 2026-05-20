@@ -10,6 +10,7 @@
       font-family: Arial;
       display: flex;
       height: 100vh;
+      overflow: hidden;
     }
 
     /* LEFT SIDE */
@@ -20,6 +21,7 @@
       align-items: center;
       padding: 20px;
       gap: 15px;
+      overflow: auto;
     }
 
     /* GRID */
@@ -28,12 +30,14 @@
       width: 700px;
       height: 700px;
       border: 2px solid black;
+      flex-shrink: 0;
     }
 
     .cell {
       border: 1px solid #777;
       cursor: pointer;
       user-select: none;
+      box-sizing: border-box;
     }
 
     /* RIGHT TOOLBAR */
@@ -45,6 +49,7 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
+      flex-shrink: 0;
     }
 
     .toolButton {
@@ -61,9 +66,11 @@
 
     textarea {
       width: 700px;
-      height: 250px;
+      height: 180px;
       font-family: monospace;
       font-size: 14px;
+      resize: vertical;
+      flex-shrink: 0;
     }
 
   </style>
@@ -73,16 +80,16 @@
   <!-- LEFT SIDE -->
   <div id="editorArea">
 
-    <h1>Nero.io Map Tile Editor</h1>
+    <h1>Nero.io Map Editor</h1>
 
     <div>
       Width:
-      <input type="number" id="widthInput" value="15" min="1">
+      <input type="number" id="widthInput" value="11" min="1">
 
       Height:
-      <input type="number" id="heightInput" value="15" min="1">
+      <input type="number" id="heightInput" value="11" min="1">
 
-      <button onclick="createGrid()">Create Map Grid</button>
+      <button onclick="createGrid()">Create Grid</button>
 
       <button onclick="generateJSON()">Generate JSON</button>
     </div>
@@ -100,7 +107,7 @@
 
     <button class="toolButton selectedTool"
             style="background:white; color:black;"
-            onclick="selectTile('F___', 'white', this)">
+            onclick="selectTile('____', 'white', this)">
       Empty
     </button>
 
@@ -111,27 +118,14 @@
     </button>
 
     <button class="toolButton"
-            style="background:gray;"
-            onclick="selectTile('rock', 'gray', this)">
-      Rock
-    </button>
-
-    <button class="toolButton"
-            style="background:gray;"
-            onclick="selectTile('roid', 'gray', this)">
-      Mini Rock
-    </button>
-
-
-    <button class="toolButton"
             style="background:green;"
-            onclick="selectTile('____', 'green', this)">
-      Food
+            onclick="selectTile('tree', 'green', this)">
+      Tree
     </button>
 
     <button class="toolButton"
             style="background:blue;"
-            onclick="selectTile('watr', 'blue', this)">
+            onclick="selectTile('water', 'blue', this)">
       Water
     </button>
 
@@ -143,49 +137,67 @@
 
     <button class="toolButton"
             style="background:orange;"
-            onclick="selectTile('sped', 'orange', this)">
-      Boost
+            onclick="selectTile('lava', 'orange', this)">
+      Lava
     </button>
 
   </div>
 
   <script>
 
-    // Stores tile values
+    // ROOM DATA
     let room = [];
 
-    // Current selected tile
-    let currentTile = "F___";
+    // CURRENT TILE
+    let currentTile = "____";
     let currentColor = "white";
 
-    // Tile color lookup
+    // DRAG PAINTING
+    let mouseDown = false;
+
+    // TILE COLORS
     const tileColors = {
-      "F___": "white",
-      "rock": "gray",
-      "roid": "gray",
+      "____": "white",
       "wall": "gray",
-      "____": "green",
-      "watr": "blue",
+      "tree": "green",
+      "water": "blue",
       "nest": "purple",
-      "sped": "orange"
+      "lava": "orange"
     };
 
+    // TRACK MOUSE
+    document.body.addEventListener("mousedown", () => {
+      mouseDown = true;
+    });
+
+    document.body.addEventListener("mouseup", () => {
+      mouseDown = false;
+    });
+
+    // SELECT TILE
     function selectTile(tileName, color, button) {
 
       currentTile = tileName;
       currentColor = color;
 
-      // Remove highlight from all buttons
       const buttons = document.querySelectorAll(".toolButton");
 
       buttons.forEach(btn => {
         btn.classList.remove("selectedTool");
       });
 
-      // Highlight selected button
       button.classList.add("selectedTool");
     }
 
+    // PAINT TILE
+    function paintTile(cell, x, y) {
+
+      room[y][x] = currentTile;
+
+      cell.style.background = currentColor;
+    }
+
+    // CREATE GRID
     function createGrid() {
 
       const width = parseInt(document.getElementById("widthInput").value);
@@ -197,33 +209,52 @@
 
       room = [];
 
-      // Create grid layout
+      // GRID LAYOUT
       grid.style.gridTemplateColumns = `repeat(${width}, 1fr)`;
       grid.style.gridTemplateRows = `repeat(${height}, 1fr)`;
 
-      // Create cells
+      // CREATE CELLS
       for (let y = 0; y < height; y++) {
 
         room[y] = [];
 
         for (let x = 0; x < width; x++) {
 
-          // Default tile
-          room[y][x] = "F___";
-
           const cell = document.createElement("div");
+
           cell.classList.add("cell");
 
-          cell.style.background = "white";
+          // BORDER CHECK
+          const isBorder =
+            x === 0 ||
+            y === 0 ||
+            x === width - 1 ||
+            y === height - 1;
 
-          // Click cell
-          cell.addEventListener("click", () => {
+          // OUTER WALLS
+          if (isBorder) {
 
-            // Change tile value
-            room[y][x] = currentTile;
+            room[y][x] = "wall";
+            cell.style.background = "gray";
 
-            // Change visual color
-            cell.style.background = currentColor;
+          } else {
+
+            room[y][x] = "____";
+            cell.style.background = "white";
+
+          }
+
+          // CLICK
+          cell.addEventListener("mousedown", () => {
+            paintTile(cell, x, y);
+          });
+
+          // DRAG
+          cell.addEventListener("mouseover", () => {
+
+            if (mouseDown) {
+              paintTile(cell, x, y);
+            }
 
           });
 
@@ -232,6 +263,7 @@
       }
     }
 
+    // GENERATE JSON
     function generateJSON() {
 
       let output = "room = [\n";
@@ -264,6 +296,7 @@
       document.getElementById("output").value = output;
     }
 
+    // START
     createGrid();
 
   </script>
