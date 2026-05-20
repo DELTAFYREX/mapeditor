@@ -1,55 +1,175 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Custom Grid</title>
+  <title>Game Map Editor</title>
 
   <style>
+
     body {
+      margin: 0;
       font-family: Arial;
       display: flex;
-      flex-direction: column;
-      align-items: left;
-      gap: 20px;
-      margin-top: 20px;
+      height: 100vh;
     }
 
+    /* LEFT SIDE */
+    #editorArea {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      gap: 15px;
+    }
+
+    /* GRID */
     #grid {
       display: grid;
-      width: 600px;
-      height: 600px;
+      width: 700px;
+      height: 700px;
       border: 2px solid black;
     }
 
     .cell {
-      border: 1px solid #ccc;
-      background-color: white;
+      border: 1px solid #777;
+      cursor: pointer;
+      user-select: none;
     }
 
-    .active {
-      background-color: tomato;
+    /* RIGHT TOOLBAR */
+    #toolbar {
+      width: 220px;
+      background: #222;
+      color: white;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
+
+    .toolButton {
+      padding: 12px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 8px;
+    }
+
+    .selectedTool {
+      outline: 4px solid yellow;
+    }
+
+    textarea {
+      width: 700px;
+      height: 250px;
+      font-family: monospace;
+      font-size: 14px;
+    }
+
   </style>
 </head>
 <body>
 
-  <h1>Map Tile Editor</h1>
+  <!-- LEFT SIDE -->
+  <div id="editorArea">
 
-  <div>
-    Width:
-    <input type="number" id="widthInput" value="10" min="1">
+    <h1>Map Editor</h1>
 
-    Height:
-    <input type="number" id="heightInput" value="10" min="1">
+    <div>
+      Width:
+      <input type="number" id="widthInput" value="15" min="1">
 
-    <button onclick="createGrid()">Create Grid</button>
+      Height:
+      <input type="number" id="heightInput" value="15" min="1">
+
+      <button onclick="createGrid()">Create Grid</button>
+
+      <button onclick="generateJSON()">Generate JSON</button>
+    </div>
+
+    <div id="grid"></div>
+
+    <textarea id="output"></textarea>
+
   </div>
 
-  <p>Clicked Cells: <span id="counter">0</span></p>
+  <!-- RIGHT SIDE -->
+  <div id="toolbar">
 
-  <div id="grid"></div>
+    <h2>Tiles</h2>
+
+    <button class="toolButton selectedTool"
+            style="background:white; color:black;"
+            onclick="selectTile('____', 'white', this)">
+      Empty
+    </button>
+
+    <button class="toolButton"
+            style="background:gray;"
+            onclick="selectTile('rock', 'gray', this)">
+      Rock
+    </button>
+
+    <button class="toolButton"
+            style="background:green;"
+            onclick="selectTile('tree', 'green', this)">
+      Tree
+    </button>
+
+    <button class="toolButton"
+            style="background:blue;"
+            onclick="selectTile('water', 'blue', this)">
+      Water
+    </button>
+
+    <button class="toolButton"
+            style="background:purple;"
+            onclick="selectTile('nest', 'purple', this)">
+      Nest
+    </button>
+
+    <button class="toolButton"
+            style="background:orange;"
+            onclick="selectTile('lava', 'orange', this)">
+      Lava
+    </button>
+
+  </div>
 
   <script>
-    let clickedCount = 0;
+
+    // Stores tile values
+    let room = [];
+
+    // Current selected tile
+    let currentTile = "____";
+    let currentColor = "white";
+
+    // Tile color lookup
+    const tileColors = {
+      "____": "white",
+      "rock": "gray",
+      "tree": "green",
+      "water": "blue",
+      "nest": "purple",
+      "lava": "orange"
+    };
+
+    function selectTile(tileName, color, button) {
+
+      currentTile = tileName;
+      currentColor = color;
+
+      // Remove highlight from all buttons
+      const buttons = document.querySelectorAll(".toolButton");
+
+      buttons.forEach(btn => {
+        btn.classList.remove("selectedTool");
+      });
+
+      // Highlight selected button
+      button.classList.add("selectedTool");
+    }
 
     function createGrid() {
 
@@ -58,42 +178,79 @@
 
       const grid = document.getElementById("grid");
 
-      // Reset grid
       grid.innerHTML = "";
-      clickedCount = 0;
-      document.getElementById("counter").textContent = clickedCount;
 
-      // Create columns and rows
+      room = [];
+
+      // Create grid layout
       grid.style.gridTemplateColumns = `repeat(${width}, 1fr)`;
       grid.style.gridTemplateRows = `repeat(${height}, 1fr)`;
 
-      // Total cells
-      const totalCells = width * height;
+      // Create cells
+      for (let y = 0; y < height; y++) {
 
-      for (let i = 0; i < totalCells; i++) {
+        room[y] = [];
 
-        const cell = document.createElement("div");
-        cell.classList.add("cell");
+        for (let x = 0; x < width; x++) {
 
-        cell.addEventListener("click", () => {
+          // Default tile
+          room[y][x] = "____";
 
-          if (!cell.classList.contains("active")) {
-            cell.classList.add("active");
-            clickedCount++;
-          } else {
-            cell.classList.remove("active");
-            clickedCount--;
-          }
+          const cell = document.createElement("div");
+          cell.classList.add("cell");
 
-          document.getElementById("counter").textContent = clickedCount;
-        });
+          cell.style.background = "white";
 
-        grid.appendChild(cell);
+          // Click cell
+          cell.addEventListener("click", () => {
+
+            // Change tile value
+            room[y][x] = currentTile;
+
+            // Change visual color
+            cell.style.background = currentColor;
+
+          });
+
+          grid.appendChild(cell);
+        }
       }
     }
 
-    // Create starting grid
+    function generateJSON() {
+
+      let output = "room = [\n";
+
+      for (let y = 0; y < room.length; y++) {
+
+        output += "    [";
+
+        for (let x = 0; x < room[y].length; x++) {
+
+          output += room[y][x];
+
+          if (x < room[y].length - 1) {
+            output += ",";
+          }
+
+        }
+
+        output += "]";
+
+        if (y < room.length - 1) {
+          output += ",";
+        }
+
+        output += "\n";
+      }
+
+      output += "];";
+
+      document.getElementById("output").value = output;
+    }
+
     createGrid();
+
   </script>
 
 </body>
