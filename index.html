@@ -251,11 +251,18 @@
       Lava
     </button>
 
-    <!-- TEAM BLUE SPAWN -->
+    <!-- BLUE SPAWN -->
     <button class="toolButton"
             style="background:#4da6ff; color:white;"
             onclick="selectTile('teamBlueSpawn', 'teamBlueSpawn', this)">
       ⬡ Blue Spawn
+    </button>
+
+    <!-- RED SPAWN -->
+    <button class="toolButton"
+            style="background:#ff4d4d; color:white;"
+            onclick="selectTile('teamRedSpawn', 'teamRedSpawn', this)">
+      ⬡ Red Spawn
     </button>
 
     <!-- ANIMATED TILES -->
@@ -328,6 +335,7 @@
       "lava": "orange",
 
       "teamBlueSpawn": "teamBlueSpawn",
+      "teamRedSpawn": "teamRedSpawn",
 
       "dancefloor": "rainbow",
       "dancefloor1": "flashBlueRed",
@@ -431,32 +439,62 @@
       button.classList.add("selectedTool");
     }
 
+    // SPAWN TILE RENDER
+    function setSpawnTile(cell, color) {
+
+      cell.style.background = color;
+
+      cell.innerHTML = `
+        <div style="
+          position:absolute;
+          inset:0;
+
+          display:flex;
+          align-items:center;
+          justify-content:center;
+
+          pointer-events:none;
+
+          font-size:65%;
+          font-weight:bold;
+
+          color:white;
+        ">
+          ⬡
+        </div>
+      `;
+
+      cell.style.position = "relative";
+
+      cell.style.overflow = "hidden";
+    }
+
     // PAINT TILE
     function paintTile(cell, x, y) {
 
       room[y][x] = currentTile;
 
-      // TEAM BLUE SPAWN
+      // BLUE SPAWN
       if (currentTile === "teamBlueSpawn") {
 
-        cell.style.background = "#4da6ff";
+        setSpawnTile(cell, "#4da6ff");
 
-        cell.innerHTML = "⬡";
+        return;
+      }
 
-        cell.style.display = "flex";
-        cell.style.alignItems = "center";
-        cell.style.justifyContent = "center";
+      // RED SPAWN
+      if (currentTile === "teamRedSpawn") {
 
-        cell.style.fontSize = "22px";
-        cell.style.fontWeight = "bold";
-
-        cell.style.color = "white";
+        setSpawnTile(cell, "#ff4d4d");
 
         return;
       }
 
       // NORMAL TILES
       cell.innerHTML = "";
+
+      cell.style.position = "";
+      cell.style.overflow = "";
 
       cell.style.background = currentColor;
     }
@@ -486,21 +524,16 @@
 
           const color = tileColors[tile] || "magenta";
 
-          // TEAM BLUE SPAWN
+          // BLUE SPAWN
           if (tile === "teamBlueSpawn") {
 
-            cell.style.background = "#4da6ff";
+            setSpawnTile(cell, "#4da6ff");
+          }
 
-            cell.innerHTML = "⬡";
+          // RED SPAWN
+          else if (tile === "teamRedSpawn") {
 
-            cell.style.display = "flex";
-            cell.style.alignItems = "center";
-            cell.style.justifyContent = "center";
-
-            cell.style.fontSize = "22px";
-            cell.style.fontWeight = "bold";
-
-            cell.style.color = "white";
+            setSpawnTile(cell, "#ff4d4d");
           }
 
           // NORMAL STATIC TILES
@@ -551,22 +584,20 @@
 
           if (currentTile === "teamBlueSpawn") {
 
-            cell.style.background = "#4da6ff";
+            setSpawnTile(cell, "#4da6ff");
+          }
 
-            cell.innerHTML = "⬡";
+          else if (currentTile === "teamRedSpawn") {
 
-            cell.style.display = "flex";
-            cell.style.alignItems = "center";
-            cell.style.justifyContent = "center";
+            setSpawnTile(cell, "#ff4d4d");
+          }
 
-            cell.style.fontSize = "22px";
-            cell.style.fontWeight = "bold";
-
-            cell.style.color = "white";
-
-          } else {
+          else {
 
             cell.innerHTML = "";
+
+            cell.style.position = "";
+            cell.style.overflow = "";
 
             cell.style.background = currentColor;
           }
@@ -592,6 +623,9 @@
           cell.style.background = "white";
 
           cell.innerHTML = "";
+
+          cell.style.position = "";
+          cell.style.overflow = "";
 
           return;
         }
@@ -621,6 +655,9 @@
           cell.style.background = "white";
 
           cell.innerHTML = "";
+
+          cell.style.position = "";
+          cell.style.overflow = "";
 
           return;
         }
