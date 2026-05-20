@@ -5,100 +5,152 @@
 
   <style>
 
-    body {
-      margin: 0;
-      font-family: Arial;
-      display: flex;
-      height: 100vh;
-      overflow: hidden;
-    }
+ body {
+  margin: 0;
+  font-family: Arial;
+  background: #ececec;
 
-    /* MAIN EDITOR AREA */
-    #editorArea {
-      flex: 1;
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
 
-      display: flex;
-      flex-direction: row;
+/* MAIN AREA */
+#editorArea {
+  flex: 1;
 
-      align-items: flex-start;
-      justify-content: flex-start;
+  display: flex;
+  gap: 20px;
 
-      gap: 20px;
+  padding: 20px;
 
-      padding: 20px;
+  overflow: auto;
+}
 
-      overflow: auto;
-    }
+/* LEFT SIDE */
+#leftPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 
-    /* LEFT SIDE */
-    #leftPanel {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
+  min-width: 0;
+}
 
-    /* GRID */
-    #grid {
-      display: grid;
+/* TOP CONTROLS */
+#controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
 
-      /* RESPONSIVE SIZE */
-      width: min(80vw, 80vh);
-      height: min(80vw, 80vh);
+#controls input {
+  width: 70px;
+  padding: 5px;
+  font-size: 16px;
+}
 
-      border: 2px solid black;
+#controls button {
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
 
-      flex-shrink: 0;
-    }
+/* GRID */
+#gridContainer {
+  display: flex;
+  justify-content: flex-start;
+}
 
-    .cell {
-      border: 1px solid #777;
-      cursor: pointer;
-      user-select: none;
-      box-sizing: border-box;
-    }
+#grid {
+  display: grid;
 
-    /* JSON PANEL */
-    #jsonPanel {
-      display: flex;
-      flex-direction: column;
-      width: 400px;
-    }
+  width: min(65vw, 75vh);
+  height: min(65vw, 75vh);
 
-    textarea {
-      width: 100%;
-      height: min(80vh, 700px);
+  background: white;
 
-      font-family: monospace;
-      font-size: 14px;
+  border: 2px solid black;
 
-      resize: none;
+  flex-shrink: 0;
+}
 
-      box-sizing: border-box;
-    }
+.cell {
+  border: 1px solid #888;
+  cursor: pointer;
+  box-sizing: border-box;
+}
 
-    /* RIGHT TOOLBAR */
-    #toolbar {
-      width: 220px;
-      background: #222;
-      color: white;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      flex-shrink: 0;
-    }
+/* JSON PANEL */
+#jsonPanel {
+  width: 320px;
 
-    .toolButton {
-      padding: 12px;
-      border: none;
-      cursor: pointer;
-      font-size: 16px;
-      border-radius: 8px;
-    }
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 
-    .selectedTool {
-      outline: 4px solid yellow;
-    }
+  flex-shrink: 0;
+}
+
+#jsonPanel h2 {
+  margin: 0;
+}
+
+textarea {
+  width: 100%;
+  height: min(65vw, 75vh);
+
+  font-family: monospace;
+  font-size: 14px;
+
+  resize: none;
+
+  padding: 10px;
+
+  box-sizing: border-box;
+}
+
+/* TOOLBAR */
+#toolbar {
+  width: 220px;
+
+  background: #222;
+  color: white;
+
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  flex-shrink: 0;
+}
+
+#toolbar h2 {
+  margin-top: 0;
+}
+
+.toolButton {
+  padding: 14px;
+
+  border: none;
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  font-size: 18px;
+  font-weight: bold;
+
+  transition: transform 0.1s;
+}
+
+.toolButton:hover {
+  transform: scale(1.03);
+}
+
+.selectedTool {
+  outline: 4px solid yellow;
+}
 
   </style>
 </head>
@@ -112,22 +164,29 @@
 
       <h1>Nero.io Map Editor</h1>
 
-      <div>
-        Width:
-        <input type="number" id="widthInput" value="11" min="1">
+<div id="controls">
 
-        Height:
-        <input type="number" id="heightInput" value="11" min="1">
+  <label>
+    Width:
+    <input type="number" id="widthInput" value="11" min="1">
+  </label>
 
-        <button onclick="createGrid()">Create Grid</button>
+  <label>
+    Height:
+    <input type="number" id="heightInput" value="11" min="1">
+  </label>
 
-        <button onclick="generateJSON()">Generate JSON</button>
+  <button onclick="createGrid()">Create Grid</button>
 
-        <button onclick="importJSON()">Import JSON</button>
-      </div>
+  <button onclick="generateJSON()">Generate JSON</button>
 
-      <div id="grid"></div>
+  <button onclick="importJSON()">Import JSON</button>
 
+</div>
+
+<div id="gridContainer">
+  <div id="grid"></div>
+</div>
     </div>
 
     <!-- JSON PANEL -->
