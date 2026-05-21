@@ -269,6 +269,173 @@
     text-decoration: underline;
       animation:pfpHoverOn 800ms linear both;
   }
+  .skinHolder {
+      position: absolute;
+      display: block;
+      width: 650px;
+      height: 600px;
+      top: 47.5%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+      background: var(--backgroundColor);
+      padding: 10px;
+      font-size: larger;
+      text-align: center;
+      border-style: solid;
+      border-color: #c1cfd8;
+      color: black;
+      display: none;
+  }
+  
+  .skinHolder span.small {
+      font-size: xx-large;
+      font-weight: bold;
+      color: black;
+      animation:pfpDefault 800ms linear both;
+  }
+  
+  .skinHolder span {
+      font-size: x-large;
+      font-weight: light;
+      color: black;
+      animation:pfpDefault 800ms linear both;
+  }
+  
+  #skinClose {
+      height: 45px;
+      width: 50px;
+      float: right;
+      position: relative;
+      opacity: .8;
+      background-image: url('data:image/svg+xml,%3Csvg xmlns%3D"http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" fill%3D"%23DD0000" viewBox%3D"0 0 16 16" width%3D"30" height%3D"30"%3E%3Cpath d%3D"M3 0 0 3 6 8 0 13 3 16 8 10 13 16 16 13 10 8 16 3 13 0 8 6 3 0Z"%3E%3C%2Fpath%3E%3C%2Fsvg%3E');
+      background-repeat: no-repeat;
+      background-position: center;
+  }
+  
+  #skinClose:hover {
+      cursor: pointer;
+      opacity: 1;
+  }
+  
+  #skinDisplay {
+      height: 448px;
+      margin-top: -20px;
+      position: absolute;
+      animation:pfpDefault 800ms linear both;
+      width: 96.5%;
+      border-style: solid;
+      border-color: #c1cfd8;
+      background-color: rgba(0, 0, 0, 0.2);
+  }
+  
+  body.mobile .skinHolder {
+    top: 50%;
+    width: calc(100% - 30px);
+    height: calc(100% - 25px);
+  }
+  body.mobile #skinDisplay {
+    width: calc(100% - 25px);
+    height: calc(100% - 78px);
+  }
+  
+  .skinItem {
+      margin: 16px 16px 12px 16px;
+      border-radius: 14px;
+      animation:pfpDefault 800ms linear both;
+      padding: 6px;
+  
+  }
+  
+  .skinItem h1 {
+      font-size: 22px;
+      animation:pfpDefault 800ms linear both;
+      font-weight: light;
+      color: #22160b;
+  }
+  
+  .skinItem span {
+      font-size: 17px;
+      font-weight: bold;
+      animation:pfpDefault 800ms linear both;
+      color: #22160b;
+  }
+  
+  #leftarrowbutton {
+      position: relative;
+      float: left;
+      height: 20%;
+      width: 20%;
+  }
+  #rightarrowbutton {
+      position: relative;
+      float: right;
+      height: 20%;
+      width: 20%;
+  }
+  #leftarrowbutton:active {
+      animation:pfpDefault 800ms linear both;
+  }
+  #rightarrowbutton:active {
+      animation:pfpDefault 800ms linear both;
+  }
+  .displaytest {
+      top: 0;
+      position: relative;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: auto;
+  }
+  .displayskinname {
+      top: -2%;
+      position: relative;
+  }
+  #skinpdiv {
+      top: -3%;
+      position: relative;
+      margin-left: auto;
+      margin-right: auto;
+      width: 50%;
+  }
+  body.mobile #skinpdiv {
+    width: 25%;
+  }
+  #skinpreview {
+      vertical-align: bottom;   
+      width: 100%;
+      height: 100%;
+      z-index: 3;
+  
+  }
+  #selectskin {
+      vertical-align: bottom;   
+      float: center;
+      margin-left: auto;
+      margin-right: auto;
+      height: 130px;
+      width: 260px;
+      z-index: 3;
+  }
+  #lockedskin {
+      display: none;
+      width: 100%;
+      height: 100%; 
+      top: 0;
+      left: 0;
+      position: absolute;
+      z-index: 3;
+  }
+  #lockbg {
+      display: inline-block;
+      width: 100%;
+      height: 100%; 
+      top: 0;
+      left: 0;
+      position: absolute;
+      opacity: 0.4;
+      z-index: -5;
+  }
 
   </style>
 </head>
@@ -277,9 +444,9 @@
   <div id="editorArea">
 
               <div style="position: absolute; right: 290px; top: 0px;" class="menuTabs">
-        <a class="menuTab discordbutton" onclick="Discordjoin()" onmouseover="PlaySound1()" title="Join the Nero.io Discord server!" href="https://discord.gg/jeDnGsj4MM" target="_blank" rel="noopener noreferrer">Nero.io Discord</a>
-        <a class="menuTab ach" onclick="displayAchievements()" onmouseover="PlaySound1()" title="View Game Achievements" href="javascript:void(0)">Info</a>
-        <a class="menuTab skin" onclick="displaySkins()" onmouseover="PlaySound1()" title="View Game Skins" href="javascript:void(0)">Tile Guide (Click to see what each tile does)</a>
+        <a class="menuTab discordbutton" onclick="Discordjoin()" title="Join the Nero.io Discord server!" href="https://discord.gg/jeDnGsj4MM" target="_blank" rel="noopener noreferrer">Nero.io Discord</a>
+        <a class="menuTab ach" onclick="displayAchievements()" title="View Game Achievements" href="javascript:void(0)">Info</a>
+        <a class="menuTab skin" onclick="displaySkins()" title="View Game Skins" href="javascript:void(0)">Tile Guide (Click to see what each tile does)</a>
         </div>
 
     <div id="leftPanel">
@@ -530,6 +697,24 @@
     </button>
 
   </div>
+                <div class="skinHolder" id="skinHolder">
+                <div class="popuptaskbar2">
+                <div id="skinClose" onclick="document.getElementsByClassName('skinHolder')[0].style.display = 'none'"></div>
+                <h1 id="skinHeader">Skins</h1>
+                </div>
+                <div id="skinDisplay">
+                  <h1 class="displayskinname">Default</h1>
+                    <div id="skinpdiv">
+                      <img id="skinpreview" src="https://deltafyrex.github.io/neroassets/onetransparentsingulardamnfuckingpixel.png?v=1708568179353">                      
+                      <img id="lockedskin" src="https://deltafyrex.github.io/neroassets/locked2.png?v=1708713794287">
+                    </div>
+                      <img id="lockbg" src="https://deltafyrex.github.io/neroassets2/58563194-553c-49ae-95db-441b06bf9bef.image.png?v=1698239960463">
+                  <div class="displaytest">◉ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○</div>
+                </div>
+                <asdfdsa class="atthebottom">
+                <img src="https://deltafyrex.github.io/neroassets/arrow2.png?v=1708534840066" id="leftarrowbutton"><img id="selectskin" src="https://deltafyrex.github.io/neroassets/selected.png?v=1708718268075"><img src="https://deltafyrex.github.io/neroassets/arrow.png?v=1708534837425" id="rightarrowbutton">
+                  </asdfdsa>
+            </div>
 
   <script>
 
@@ -545,6 +730,7 @@
 
     let undoStack = [];
     let redoStack = [];
+    global.skinpage = 0
 
 let myVariable = true;
 const checkbox = document.querySelector('#myCheckbox');
@@ -552,6 +738,131 @@ const checkbox = document.querySelector('#myCheckbox');
 checkbox.addEventListener('change', (event) => {
   myVariable = event.target.checked; // Sets variable to true or false
 });
+
+                  function displaySkins() {
+                document.getElementsByClassName('skinHolder')[0].style.display = 'block';
+                PlaySound();
+            };
+ let counterthing = document.querySelector(".displaytest");
+  let skinnamedisplay = document.querySelector(".displayskinname");
+  let myImg = document.querySelector("#skinpreview");
+  let lock = document.querySelector("#lockedskin");
+
+  $("#rightarrowbutton").on("click", function() {
+      if (global.skinpage === 18) {
+          global.skinpage = 0;  
+      } else {
+          global.skinpage += 1;
+      };
+      changeskinpreview();
+  });
+  $("#leftarrowbutton").on("click", function() {
+      if (global.skinpage === 0) {
+          global.skinpage = 18;  
+      } else {
+          global.skinpage -= 1;
+      };                 
+      changeskinpreview();
+  });
+
+  function changeskinpreview() {
+    if (global.skinpage === 0) {
+    counterthing.textContent = "◉ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○";
+    skinnamedisplay.textContent = "Default";
+    myImg.src = "https://deltafyrex.github.io/neroassets/onetransparentsingulardamnfuckingpixel.png?v=1708568179353";
+    }
+    if (global.skinpage === 1) {
+    counterthing.textContent = "○ ◉ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○";
+    skinnamedisplay.textContent = "Broken Signal";
+    myImg.src = "https://deltafyrex.github.io/neroassets/tv.png?v=1708615075011"
+    }
+    if (global.skinpage === 2) {
+    counterthing.textContent = "○ ○ ◉ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○";
+    skinnamedisplay.textContent = "Tank Charm";
+    myImg.src = "https://deltafyrex.github.io/neroassets/2024_01_29_0ry_Kleki.png?v=1708536680813";
+    }
+    if (global.skinpage === 3) {
+    counterthing.textContent = "○ ○ ○ ◉ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○";
+    skinnamedisplay.textContent = "Deltafyrex";
+    myImg.src = "https://deltafyrex.github.io/neroassets/MOSHED-2023-12-14-17-8-14.gif?v=1708618924966";
+    }
+    if (global.skinpage === 4) {
+    counterthing.textContent = "○ ○ ○ ○ ◉ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○";
+    skinnamedisplay.textContent = "Ultimate Primal";
+    myImg.src = "https://deltafyrex.github.io/neroassets/primal.webp?v=1708602763032";
+    }
+    if (global.skinpage === 5) {
+    counterthing.textContent = "○ ○ ○ ○ ○ ◉ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○";
+    skinnamedisplay.textContent = "Kangaroo";
+    myImg.src = "https://deltafyrex.github.io/neroassets/image.webp?v=1708623596560";
+    }
+    if (global.skinpage === 6) {
+    counterthing.textContent = "○ ○ ○ ○ ○ ○ ◉ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○";
+    skinnamedisplay.textContent = "ChickenSandwhichMan";
+    myImg.src = "https://deltafyrex.github.io/neroassets/Untitled%20Project%20(22).jpg?v=1708356424097"
+    }
+    if (global.skinpage === 7) {
+    counterthing.textContent = "○ ○ ○ ○ ○ ○ ○ ◉ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○";
+    skinnamedisplay.textContent = "Cogwheel";
+    myImg.src = "https://deltafyrex.github.io/neroassets/Gear-icon-transparent-background.png?v=1705579178381";
+    }
+    if (global.skinpage === 8) {
+    counterthing.textContent = "○ ○ ○ ○ ○ ○ ○ ○ ◉ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○";
+    skinnamedisplay.textContent = "Eggbert";
+    myImg.src = "https://deltafyrex.github.io/neroassets/1165825970528325682l.webp?v=1714156807621";
+    }
+    if (global.skinpage === 9) {
+    counterthing.textContent = "○ ○ ○ ○ ○ ○ ○ ○ ○ ◉ ○ ○ ○ ○ ○ ○ ○ ○ ○";
+    skinnamedisplay.textContent = "Squarey";
+    myImg.src = "https://deltafyrex.github.io/neroassets/1165934167280848969.webp?v=1714156773284";
+    }
+    if (global.skinpage === 10) {
+    counterthing.textContent = "○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ◉ ○ ○ ○ ○ ○ ○ ○ ○";
+    skinnamedisplay.textContent = "Triangleton";
+    myImg.src = "https://deltafyrex.github.io/neroassets/1165934432608321546.webp?v=1714156768932";
+    }
+    if (global.skinpage === 11) {
+    counterthing.textContent = "○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ◉ ○ ○ ○ ○ ○ ○ ○";
+    skinnamedisplay.textContent = "Pentogan";
+    myImg.src = "https://deltafyrex.github.io/neroassets/1165825970528325682.webp?v=1714156764280";
+    }
+    if (global.skinpage === 12) {
+    counterthing.textContent = "○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ◉ ○ ○ ○ ○ ○ ○";
+    skinnamedisplay.textContent = "Gemy";
+    myImg.src = "https://deltafyrex.github.io/neroassets/1165826077843796018.webp?v=1714156778841";
+    }
+    if (global.skinpage === 13) {
+    counterthing.textContent = "○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ◉ ○ ○ ○ ○ ○";
+    skinnamedisplay.textContent = "Coined";
+    myImg.src = "https://deltafyrex.github.io/neroassets/2e2ccc30-5baf-41a2-aceb-c5456a1cc6dc.image.png?v=1708619146196";
+    }
+    if (global.skinpage === 14) {
+    counterthing.textContent = "○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ◉ ○ ○ ○ ○";
+    skinnamedisplay.textContent = "Sex Update";
+    myImg.src = "https://deltafyrex.github.io/neroassets/2023_12_06_0yl_Kleki.png?v=1701908710293";
+    }
+    if (global.skinpage === 15) {
+    counterthing.textContent = "○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ◉ ○ ○ ○";
+    skinnamedisplay.textContent = "Cat-Code";
+    myImg.src = "https://deltafyrex.github.io/neroassets2/2024_01_15_05q_Kleki.png?v=1705301828958";
+    }
+    if (global.skinpage === 16) {
+    counterthing.textContent = "○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ◉ ○ ○";
+    skinnamedisplay.textContent = "Very Much Incommodiousness";
+    myImg.style.filter = 'blur(10px)';
+    myImg.src = "https://deltafyrex.github.io/neroassets2/1200px-Icon-round-Question_mark.svg.png?v=1699273933044";
+    }
+    if (global.skinpage === 17) {
+    counterthing.textContent = "○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ◉ ○";
+    skinnamedisplay.textContent = "Swaggity Waggity";
+    myImg.src = "https://deltafyrex.github.io/neroassets/spider_2.png?v=1722633319003";
+    }
+    if (global.skinpage === 18) {
+    counterthing.textContent = "○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ◉";
+    global.selectedskin = "minosskin";
+    myImg.src = "https://deltafyrex.github.io/neroassets/06f19349-48de-46ec-9877-6ea585848961.image.png?v=1739043712157";
+    }
+  };
 
     const tileColors = {
 
