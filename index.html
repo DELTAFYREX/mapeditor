@@ -409,6 +409,12 @@
       Siege Boss Spawn
     </button>
 
+        <button class="toolButton"
+            style="background: #fceded;"
+            onclick="selectTile('sibs', '#fceded', this)">
+      AntiTank Machine Gun
+    </button>
+
     <!-- EMPTY -->
     <button class="toolButton selectedTool"
             style="background:#F0F7FA; color:black;"
@@ -497,6 +503,8 @@ checkbox.addEventListener('change', (event) => {
       "dcf5": "flashGreyRed",
 
       "sibs": "#fc4e51",
+      
+      "atmg": "antitankminigun",
 
     };
 
@@ -789,6 +797,13 @@ checkbox.addEventListener('change', (event) => {
         return;
       }
 
+      if (currentTile === "atmg") {
+
+        setSoftPointTileblack(cell, "🥆", "#fceded");
+
+        return;
+      }
+
       cell.innerHTML = "";
 
       cell.style.position = "";
@@ -875,6 +890,11 @@ checkbox.addEventListener('change', (event) => {
 
             setSoftPointTileblack(cell, "▣", "black");
           }
+                    else if (tile === "atmg") {
+
+
+                  setSoftPointTileblack(cell, "🥆", "#fceded");
+        }
 
           else if (
             !color.includes("dancefloor") &&
