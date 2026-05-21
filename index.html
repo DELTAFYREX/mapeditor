@@ -346,7 +346,7 @@
     <button class="toolButton"
             style="background:#ffbf7e;"
             onclick="selectTile('sped', '#ffbf7e', this)">
-      Speed
+      Boost Pad
     </button>
 
     <button class="toolButton"
@@ -400,6 +400,12 @@
     <button class="toolButton"
             style="background: pink;"
             onclick="selectTile('dcf5', 'flashGreyRed', this)">
+      Gray/Red
+    </button>
+
+    <button class="toolButton"
+            style="background: #fc4e51;"
+            onclick="selectTile('dcf5', '#fc4e51', this)">
       Gray/Red
     </button>
 
@@ -1160,7 +1166,7 @@ function createGrid() {
 
       output += "];";
 
-      document.getElementById("output").value = output;
+      document.getElementById("output").value = "let	{ base1: bas1 , base2: bas2, base3: bas3, base4: bas4 } = require('../tiles/tdm.js'),{ normal: norm, nest, wall: WALL, water: watr, team1trench: t1tr, team2trench: t2tr, uhhwall: UWAL, uhhwall2: UWA2, speed: sped } = require('../tiles/misc.js'),{ dominatorContestedBlank: cont, trapDominatorContestedBlank: scon, sanctuaryBlueT3: sblu, sanctuaryGreen: sgre, wallDominatorContestedBlank: ucon, wallDominatorContestedBlank2: uco2 } = require('../tiles/dominators.js')," + "/n" + "/n" + output;
     }
 
     function importJSON() {
