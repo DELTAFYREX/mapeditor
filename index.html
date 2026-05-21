@@ -1091,38 +1091,40 @@ checkbox.addEventListener('change', (event) => {
 
     }
 
-    function createGrid() {
+function createGrid() {
 
-      const width = parseInt(document.getElementById("widthInput").value);
-      const height = parseInt(document.getElementById("heightInput").value);
+  const width = parseInt(document.getElementById("widthInput").value);
+  const height = parseInt(document.getElementById("heightInput").value);
 
-      room = [];
+  room = [];
 
-      for (let y = 0; y < height; y++) {
+  for (let y = 0; y < height; y++) {
 
-        room[y] = [];
+    room[y] = [];
 
-        for (let x = 0; x < width; x++) {
+    for (let x = 0; x < width; x++) {
 
-          const isBorder =
-            x === 0 ||
-            y === 0 ||
-            x === width - 1 ||
-            y === height - 1;
+      const isBorder =
+        x === 0 ||
+        y === 0 ||
+        x === width - 1 ||
+        y === height - 1;
 
-          if (isBorder) {
+      if (isBorder) {
 
-            if (myVariable) room[y][x] = "wall";
+        room[y][x] =
+          myVariable ? "wall" : "F___";
 
-          } else {
+      } else {
 
-            room[y][x] = myVariable ? "cont" : "F___";
-          }
-        }
+        room[y][x] =
+          myVariable ? "cont" : "F___";
       }
-
-      rebuildGrid();
     }
+  }
+
+  rebuildGrid();
+}
 
     function generateJSON() {
 
