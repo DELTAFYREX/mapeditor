@@ -171,15 +171,127 @@
       outline: 4px solid yellow;
     }
 
+      a.menuTab {
+    float: right;
+    height: 13px;
+    font: 13px "Black Ops One";
+    border-radius: 0px 0px 5px 5px;
+    padding: 6px 10px 7px 10px;
+    color: #FFFFFF !important;
+    text-decoration: none;
+    margin-right: 10px;
+  }
+  a.menuTab.discordbutton {
+     padding: 6px 10px 7px 28px;
+          border-bottom: 2px solid #6175ba;
+      box-shadow: inset 0 -2px #6175ba;
+      -webkit-box-shadow: inset 0 -2px #6175ba;
+        animation:pfpDefault 800ms linear both;
+    background: #7289DA url("https://deltafyrex.github.io/neroassets4/discord-white-icon.webp") 4px 3px/21px no-repeat;
+  }
+  a.menuTab.discordbutton:active,
+  a.menuTab.discordbutton:hover {
+      outline: none;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+  }
+  a.menuTab.catto {
+    background: #FF0000 url("https://cloud-cube.s3.amazonaws.com/m660o440l0wv/public/coder.png") 8px 6px no-repeat;
+    padding: 6px 10px 7px 28px;
+        border-bottom: 2px solid #c91a1a;
+      box-shadow: inset 0 -2px #c91a1a;
+      -webkit-box-shadow: inset 0 -2px #c91a1a;
+        animation:pfpDefault 800ms linear both;
+  }
+  a.menuTab.catto:active,
+  a.menuTab.catto:hover {
+      outline: none;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+  }
+  body.mobile a.menuTab.catto {
+  display: none;
+  }
+  
+  a.menuTab.ach {
+    background: #2bab2f  url("https://deltafyrex.github.io/neroassets/Trophy.png?v=1708025693434") 3px 2px/23px no-repeat;
+    padding: 6px 10px 7px 28px;
+    border-bottom: 2px solid #2a802d;
+    box-shadow: inset 0 -2px #2a802d;
+    -webkit-box-shadow: inset 0 -2px #2a802d;
+    animation:pfpDefault 800ms linear both;
+  }
+  a.menuTab.ach:active,
+  a.menuTab.ach:hover {
+      top: 1px;
+      outline: none;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+  }
+  
+  a.menuTab.skin {
+    background: #9900FF  url("https://deltafyrex.github.io/neroassets2/stick.png?v=1708440293253") 3px 2px/23px no-repeat;
+    padding: 6px 10px 7px 28px;
+          border-bottom: 2px solid #7b11c2;
+      box-shadow: inset 0 -2px #7b11c2;
+      -webkit-box-shadow: inset 0 -2px #7b11c2;
+        animation:pfpDefault 800ms linear both;
+  }
+  a.menuTab.skin:active,
+  a.menuTab.skin:hover {
+      top: 1px;
+      outline: none;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+  }
+  
+  a.menuTab.stat {
+    background: #1E8449  url("https://cloud-cube.s3.amazonaws.com/m660o440l0wv/public/play.png") 3px 2px/23px no-repeat;
+    padding: 6px 10px 7px 28px;
+          border-bottom: 2px solid #156637;
+      box-shadow: inset 0 -2px #156637;
+      -webkit-box-shadow: inset 0 -2px #156637;
+        animation:pfpDefault 800ms linear both;
+  }
+  a.menuTab.stat:active,
+  a.menuTab.stat:hover {
+      top: 1px;
+      outline: none;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+  }
+  body.mobile a.menuTab.stat {
+  display: none;
+  }
+  
+  a.menuTab.questionmark {
+    background: #FFFFFF  url("https://deltafyrex.github.io/neroassets/2022_06_23_11e_Kleki.png?v=1675997243695") 3px 2px/23px no-repeat;
+    padding: 6px 10px 7px 28px;
+        animation:pfpDefault 800ms linear both;
+  }
+  a.menuTab:link:hover, a.menuTab:visited:hover {
+    text-decoration: underline;
+      animation:pfpHoverOn 800ms linear both;
+  }
+
   </style>
 </head>
 <body>
 
   <div id="editorArea">
 
+              <div class="menuTabs">
+        <a class="menuTab discordbutton" onclick="Discordjoin()" onmouseover="PlaySound1()" title="Join the Nero.io Discord server!" href="https://discord.gg/jeDnGsj4MM" target="_blank" rel="noopener noreferrer">Nero.io Discord</a>
+        <a class="menuTab catto" onclick="PlaySound()" onmouseover="PlaySound1()" title="View the game's source code" href="https://glitch.com/edit/#!/neroio2" target="_blank" rel="noopener noreferrer">broken</a>
+        <a class="menuTab stat" onclick="PlaySound()" onmouseover="PlaySound1()" title="Old Nero.io (Nero.io 1)" href="https://neroio.glitch.me" target="_blank" rel="noopener noreferrer">useless button</a>
+        <a class="menuTab ach" onclick="displayAchievements()" onmouseover="PlaySound1()" title="View Game Achievements" href="javascript:void(0)">Achievements</a>
+        <a class="menuTab skin" onclick="displaySkins()" onmouseover="PlaySound1()" title="View Game Skins" href="javascript:void(0)">Skins</a>
+        <a class="menuTab"><label><input id="optSound" tabindex="-1" class="checkbox" type="checkbox" title="im too lazy to make a button right now just sit there, cry and fucking deal with it wahh wahh wahh"> Enable Music</label></a>
+          </div>
+
     <div id="leftPanel">
 
-      <div><h1>Nero.io Map Editor<button style="justify-content: right; text-align: right;" onclick="bringupmenu()">Help</button></h1></div>       
+      <h1>Nero.io Map Editor</h1>
 
       <div id="controls">
 
