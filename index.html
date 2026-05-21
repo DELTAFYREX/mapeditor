@@ -822,7 +822,7 @@ checkbox.addEventListener('change', (event) => {
             setSpawnTile(cell, "#F0F7FA");
           }
 
-          else if (tile === "uco1") {
+          else if (tile === "ucon") {
 
             setControlPointTile(cell, "1");
           }
@@ -1166,8 +1166,7 @@ checkbox.addEventListener('change', (event) => {
 
         text = text.replace(";", "");
 
-        text = text.replace(/\b([a-zA-Z_]+)\b/g, '"$1"');
-
+text = text.replace(/\b([a-zA-Z0-9_]+)\b/g, '"$1"');
         room = JSON.parse(text);
 
         document.getElementById("widthInput").value =
