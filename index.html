@@ -238,7 +238,7 @@
     <!-- WALL -->
     <button class="toolButton"
             style="background:#959597;"
-            onclick="selectTile('wall', '#959597', this)">
+            onclick="selectTile('WALL', '#959597', this)">
       Wall
     </button>
 
@@ -444,7 +444,7 @@ checkbox.addEventListener('change', (event) => {
 
       "F___": "#F0F7FA",
 
-      "wall": "#959597",
+      "WALL": "#959597",
 
       "____": "#f0f4c5",
 
@@ -1127,7 +1127,7 @@ function createGrid() {
       if (isBorder) {
 
         room[y][x] =
-          myVariable ? "wall" : "F___";
+          myVariable ? "WALL" : "F___";
 
       } else {
 
