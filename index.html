@@ -686,7 +686,7 @@ checkbox.addEventListener('change', (event) => {
       cell.style.overflow = "hidden";
     }
 
-        function setSoftPointTileblack(cell, number, color) {
+        function setSoftPointTileblack(cell, number, color, textcolor) {
 
 
       cell.innerHTML = `
@@ -703,7 +703,7 @@ checkbox.addEventListener('change', (event) => {
           font-size:85%;
           font-weight:bold;
 
-          color:white;
+          color:${textcolor ?? "white"};
         ">
           ${number}
         </div>
@@ -799,7 +799,7 @@ checkbox.addEventListener('change', (event) => {
 
       if (currentTile === "atmg") {
 
-        setSoftPointTileblack(cell, "🥆", "black");
+        setSoftPointTileblack(cell, "🥆", "#fceded", "black");
 
         return;
       }
@@ -893,7 +893,7 @@ checkbox.addEventListener('change', (event) => {
                     else if (tile === "atmg") {
 
 
-                  setSoftPointTileblack(cell, "🥆", "black");
+                  setSoftPointTileblack(cell, "🥆", "#fceded", "black");
         }
 
           else if (
