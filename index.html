@@ -515,6 +515,14 @@
       Shape Spawn Tile
     </button>
 
+        <!-- NEST -->
+    <button class="toolButton"
+            style="background:#E0E1F4;"
+            onclick="selectTile('nest', '#E0E1F4', this)"
+            title="Tile that spawns higher-tier shapes like hexagons and pentagons. It can still spawn lower-tier shapes and also spawns crashers to attack players. Bosses also spawn here on the map. Looks like a purple tile.">
+      Nest
+    </button>
+
     <button class="toolButton"
             style="background: #bababa;"
             onclick="selectTile('rock', 'rocktile', this)"
@@ -529,21 +537,13 @@
       □ Mini Rock
     </button>
 
-    <!-- NEST -->
-    <button class="toolButton"
-            style="background:#E0E1F4;"
-            onclick="selectTile('nest', '#E0E1F4', this)"
-            title="Tile that spawns higher-tier shapes like hexagons and pentagons. It can still spawn lower-tier shapes and also spawns crashers to attack players. Bosses also spawn here on the map. Looks like a purple tile.">
-      Nest
-    </button>
-    
     <!-- WATER -->
     <button class="toolButton"
             style="background:#7efff0;"
             onclick="selectTile('watr', '#7efff0', this)"
             title="Tile that damps velocity and slows projectiles and players down, making some paths around the map harder to traverse. Looks like an aqua-colored tile.">
       Water
-    </button>
+    </button><hr>
 
     <h2>Risk Tiles</h2>
 
@@ -615,7 +615,9 @@
             onclick="selectTile('UWA2', 'softPoint2', this)"
             title="A special wall that lets you pass through it if you capture the Gate Switch that controls it. There are two sets of both ofthese tiles to further increase map gameplay flexibility. This tile is controlled by the second Gate Switch. Looks like a half-transparent wall that changes colors to represent which team can pass through it.">
       Gate Wall 2
-    </button>
+    </button><hr>
+
+    <h2>Other Tiles</h2>
 
     <!-- PORTAL -->
     <button class="toolButton"
@@ -624,8 +626,6 @@
             title="A tile that teleports you to another portal around the map when entered. If there is more than one other portal, it sends you to a random one excluding itself. Looks like a dark gray tile.">
       Portal
     </button>
-
-    <h2>Other Tiles</h2>
 
     <!-- Speed -->
     <button class="toolButton"
@@ -647,7 +647,7 @@
             onclick="selectTile('atmg', '#fceded', this)"
             title='Default tile that spawns an "Anti-Tank Machine Gun" at its center. The ATMG locks onto and destroys any tank in its view and deals near-infinite damage per bullet. (Looks like an empty tile with an ATMG in it obviously.)'>
       Anti Tank Machine Gun
-    </button>
+    </button><hr>
   
     <h2>Decorative Tiles</h2>
 
