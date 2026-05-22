@@ -489,22 +489,21 @@
   <!-- TOOLBAR -->
   <div id="toolbar">
 
-    <h2>Risk Tiles</h2>
+    <h2>Default Tiles</h2>
 
-    <!-- Capture Point -->
-    <button class="toolButton"
+    <!-- EMPTY -->
+    <button class="toolButton selectedTool"
             style="background:#F0F7FA; color:black;"
-            onclick="selectTile('cont', 'neutralSpawn', this)"
-            title="the default capture point in the risk gamemode, you use it to advance territory for your team in order to get farther into the map. it is white by default and changes to different teams depending on what team is controlling the dominator in the center of the tile">
-      ⬡ Capture Point
+            onclick="selectTile('F___', '#F0F7FA', this)"
+            title="Empty tile that does not spawn shapes, rocks, roids, or walls. Just a normal empty tile. Looks slightly bluish white.">
+      Empty Tile
     </button>
 
     <!-- WALL -->
     <button class="toolButton"
             style="background:#959597;"
             onclick="selectTile('WALL', '#959597', this)"
-            title="the wall tile, blocks off sections of the map to make gameplay more interesting, good for mazes. projectiles cannot pierce it and kills them. looks like a big gray square as big as the tile">
-            
+            title="The wall tile. Blocks off sections of the map to make gameplay more interesting and is good for mazes. Projectiles cannot pierce it and are destroyed on contact. Looks like a big gray square as large as the tile.">
       Wall
     </button>
 
@@ -512,61 +511,85 @@
     <button class="toolButton"
             style="background:#f0f4c5;"
             onclick="selectTile('____', '#f0f4c5', this)"
-            title="empty tile that has shape spawning enabled. looks just like a normal empty tile. spawns basic shapes like eggs squares and triangles and sometimes pentagons">
+            title="Empty tile that has shape spawning enabled. Looks just like a normal empty tile. Spawns basic shapes like eggs, squares, and triangles, and sometimes pentagons.">
       Shape Spawn Tile
     </button>
 
     <button class="toolButton"
             style="background: #bababa;"
-            onclick="selectTile('roid', 'roidtile', this)"
-            title='tile that has shape spawning enabled, also generates smaller sized rocks called "roids". projectiles bounce off of them. shape rarity is the same as the shape spawn tile. looks just like a regular empty tile just with the shape spawning and the mini rocks'>
-      □ Mini Rock
+            onclick="selectTile('rock', 'rocktile', this)"
+            title="Tile that has shape spawning enabled and also generates rock entities. Projectiles bounce off of them. Shape spawning rarity is the same as the Shape Spawn Tile. Looks just like a normal empty tile but with shape spawning and rock entities in it.">
+      ▣ Rock
     </button>
 
     <button class="toolButton"
             style="background: #bababa;"
-            onclick="selectTile('rock', 'rocktile', this)"
-            title="tile that has shape spawning enabled. also generates rock entities. projectiles bounce off of them. shape spawning rarity is the same as the shape spawning tile. looks just like a normal empty tile just with the shape spawning and the rock entities in it.">
-      ▣ Rock
-    </button>
-
-    <!-- WATER -->
-    <button class="toolButton"
-            style="background:#7efff0;"
-            onclick="selectTile('watr', '#7efff0', this)"
-            title="tile that damps velocity, slows projectiles and players down good for making some paths around the map harder. looks like an aqua colored tile">
-      Water
+            onclick="selectTile('roid', 'roidtile', this)"
+            title='Tile that has shape spawning enabled and also generates smaller-sized rocks called "roids." Projectiles bounce off of them. Shape rarity is the same as the Shape Spawn Tile. Looks just like a regular empty tile but with shape spawning and mini rocks.'>
+      □ Mini Rock
     </button>
 
     <!-- NEST -->
     <button class="toolButton"
             style="background:#E0E1F4;"
             onclick="selectTile('nest', '#E0E1F4', this)"
-            title="tile that spawns higher tier shapes like hexagons and pentagons, can still spawn lower tier shapes and spawns crashers to attack players. bosses also spawn here on the map as well. looks like a purple tile">
+            title="Tile that spawns higher-tier shapes like hexagons and pentagons. It can still spawn lower-tier shapes and also spawns crashers to attack players. Bosses also spawn here on the map. Looks like a purple tile.">
       Nest
+    </button>
+    
+    <!-- WATER -->
+    <button class="toolButton"
+            style="background:#7efff0;"
+            onclick="selectTile('watr', '#7efff0', this)"
+            title="Tile that damps velocity and slows projectiles and players down, making some paths around the map harder to traverse. Looks like an aqua-colored tile.">
+      Water
+    </button>
+
+    <h2>Risk Tiles</h2>
+
+    <!-- Capture Point -->
+    <button class="toolButton"
+            style="background:#F0F7FA; color:black;"
+            onclick="selectTile('cont', 'neutralSpawn', this)"
+            title="The default capture point in the Risk gamemode. You use it to advance territory for your team in order to get farther into the map. It is white by default and changes to different teams depending on what team is controlling the dominator in the center of the tile.">
+      ⬡ Capture Point
     </button>
 
     <!-- BLUE SPAWN -->
     <button class="toolButton"
             style="background:#CAE4F6; color:black;"
             onclick="selectTile('sblu', 'teamBlueSpawn', this)"
-            title="the blue team spawn in the risk gamemode, when the blue sanctuary in the tile is defeated by the red team, the red team wins and a new round of risk starts. looks like a blue tile with a big capture point in it with more health">
-      ⬡ Blue Spawn
+            title="The blue team spawn in the Risk gamemode. When the blue sanctuary in the tile is defeated by the red team, the red team wins and a new round of Risk starts. Looks like a blue tile with a large capture point in it with more health.">
+      ⬡ Risk Blue Spawn
     </button>
 
     <!-- RED SPAWN -->
     <button class="toolButton"
             style="background:#F3CED1; color:black;"
             onclick="selectTile('sgre', 'teamRedSpawn', this)"
-            title="the red team spawn in the risk gamemode, when the red sanctuary in the tile is defeated by the blue team, the blue team wins and a new round of risk starts. looks like a red tile with a big capture point in it with more health">
-      ⬡ Red Spawn
+            title="The red team spawn in the Risk gamemode. When the red sanctuary in the tile is defeated by the blue team, the blue team wins and a new round of Risk starts. Looks like a red tile with a large capture point in it with more health.">
+      ⬡ Risk Red Spawn
+    </button>
+
+    <!-- Trench 1 -->
+    <button class="toolButton"
+            style="background:#c4d7e4; color:black;"
+            onclick="selectTile('t1tr', '#c4d7e4', this)"
+            title="A tile that slows down any players not on the blue team. Looks like a slightly darker blue tile.">
+      Blue Trench
+    <!-- Trench2  -->
+    <button class="toolButton"
+            style="background:#e5c8cb; color:black;"
+            onclick="selectTile('t2tr', '#e5c8cb', this)"
+            title="A tile that slows down any players not on the red team. Looks like a slightly darker red tile.">
+      Red Trench
     </button>
 
     <!-- gate POINT 1 -->
     <button class="toolButton"
             style="background: linear-gradient(90deg, #f6dede, #F0F7FA, #dcecf8); color:black;"
             onclick="selectTile('ucon', 'controlPoint1', this)"
-            title="a special capture point that when captured to your team, allows you and your teammates to pass through the gate wall tiles this dominator controls. there are two sets of both of these tiles to further increase map gameplay flexability. (this tile controls the first set of gate walls). looks like a white tile with an 8 sided dominator">
+            title="A special capture point that, when captured by your team, allows you and your teammates to pass through the Gate Wall tiles this dominator controls. There are two sets of both of these tiles to further increase map gameplay flexibility. This tile controls the first set of Gate Walls. Looks like a white tile with an 8-sided dominator.">
       Gate Switch
     </button>
 
@@ -574,7 +597,7 @@
     <button class="toolButton"
             style="background:#cacacb; color:black;"
             onclick="selectTile('UWAL', 'softPoint1', this)"
-            title="a special wall that lets you pass through it if you capture the gate point that controls it. there are two sets of both of these tiles to further increase map gameplay flexability. (this tile is controlled by the first gate point). looks like a half transparent wall that will change colors to represent which team can pass through them">
+            title="A special wall that lets you pass through it if you capture the Gate Switch that controls it. There are two sets of both of these tiles to further increase map gameplay flexibility. This tile is controlled by the first Gate Switch. Looks like a half-transparent wall that changes colors to represent which team can pass through it.">
       Gate Wall
     </button>
 
@@ -582,7 +605,7 @@
     <button class="toolButton"
             style="background: linear-gradient(90deg, #f6dede, #F0F7FA, #dcecf8); color:black;"
             onclick="selectTile('uco2', 'controlPoint2', this)"
-            title="a special capture point that when captured to your team, allows you and your teammates to pass through the gate wall tiles this dominator controls. there are two sets of both of these tiles to further increase map gameplay flexability. (this tile controls the second set of gate walls). looks like a white tile with an 8 sided dominator">
+            title="A special capture point that, when captured by your team, allows you and your teammates to pass through the Gate Wall tiles this dominator controls. There are two sets of both of these tiles to further increase map gameplay flexibility. This tile controls the second set of Gate Walls. Looks like a white tile with an 8-sided dominator.">
       Gate Switch 2
     </button>
 
@@ -590,7 +613,7 @@
     <button class="toolButton"
             style="background:#cacacb; color:black;"
             onclick="selectTile('UWA2', 'softPoint2', this)"
-            title="a special wall that lets you pass through it if you capture the gate point that controls it. there are two sets of both of these tiles to further increase map gameplay flexability. (this tile is controlled by the second gate point). looks like a half transparent wall that will change colors to represent which team can pass through them">
+            title="A special wall that lets you pass through it if you capture the Gate Switch that controls it. There are two sets of both ofthese tiles to further increase map gameplay flexibility. This tile is controlled by the second Gate Switch. Looks like a half-transparent wall that changes colors to represent which team can pass through it.">
       Gate Wall 2
     </button>
 
@@ -598,120 +621,98 @@
     <button class="toolButton"
             style="background:#5f5f5f; color:black;"
             onclick="selectTile('port', '#5f5f5f', this)"
-            title="a tile that if entered will teleport you to another portal around the map. if there is more than one other portal it will send you to a random one excluding this one. looks like a dark grey tile">
+            title="A tile that teleports you to another portal around the map when entered. If there is more than one other portal, it sends you to a random one excluding itself. Looks like a dark gray tile.">
       Portal
-    </button>
-
-    <!-- Trench 1 -->
-    <button class="toolButton"
-            style="background:#c4d7e4; color:black;"
-            onclick="selectTile('t1tr', '#c4d7e4', this)"
-            title="a tile that slows down any players not on the blue team. looks like a slightly darker blue tile">
-      Blue Trench
-    </button>
-
-    <!-- Trench2  -->
-    <button class="toolButton"
-            style="background:#e5c8cb; color:black;"
-            onclick="selectTile('t2tr', '#e5c8cb', this)"
-            title="a tile that slows down any players not on the red team. looks like a slightly darker red tile">
-      Red Trench
     </button>
 
     <h2>Other Tiles</h2>
 
-    <!-- ANIMATED TILES -->
-    
     <!-- Speed -->
     <button class="toolButton"
             style="background:#ffbf7e;"
             onclick="selectTile('sped', '#ffbf7e', this)"
-            title="tile that increases the velocities of tanks and projectiles, the opposite of the water tile. looks like an orange tile">
+            title="Tile that increases the velocity of tanks and projectiles. The opposite of the Water tile. Looks like an orange tile.">
       Boost Pad
-    </button>
-
-    <button class="toolButton"
-            style="background: black; color: white"
-            onclick="selectTile('blat', 'black', this)"
-            title="empty tile except colored black...thats it">
-      Black Tile
-    </button>
-
-    <button class="toolButton"
-            style="background: black; color: white"
-            onclick="selectTile('blrd', 'blackroid', this)"
-            title="the mini rock tile but the tile is colored black">
-      □ Black Mini Rock Tile
-    </button>
-
-    <button class="toolButton"
-            style="background: black; color: white"
-            onclick="selectTile('blrk', 'blackrock', this)"
-            title="the rock tile but the tile is colored black">
-      ▣ Black Rock Tile
-    </button>
-
-    <button class="toolButton"
-            style="background: linear-gradient(90deg, red, orange, yellow, green, blue, purple);"
-            onclick="selectTile('dcf0', 'rainbow', this)"
-            title="empty tile but rainbow colored (the color is animated)">
-      Rainbow
-    </button>
-
-    <button class="toolButton"
-            style="background: blue;"
-            onclick="selectTile('dcf1', 'flashBlueRed', this)"
-            title="empty tile that will change colors between blue and red">
-      Blue/Red
-    </button>
-
-    <button class="toolButton"
-            style="background: cyan;"
-            onclick="selectTile('dcf2', 'flashBlueGray', this)"
-            title="empty tile that will change colors between blue and gray, this tile is different than the gray/blue tile because the colors are flipped">
-      Blue/Gray
-    </button>
-
-    <button class="toolButton"
-            style="background: lightblue;"
-            onclick="selectTile('dcf3', 'flashGreyBlue', this)"
-            title="empty tile that will change colors between gray and blue, this tile is different than the blue/gray tile because the colors are flipped">
-      Gray/Blue
-    </button>
-
-    <button class="toolButton"
-            style="background: red;"
-            onclick="selectTile('dcf4', 'flashRedGrey', this)"
-            title="empty tile that will change colors between red and gray, this tile is different than the red/gray tile because the colors are flipped">
-      Red/Gray
-    </button>
-
-    <button class="toolButton"
-            style="background: pink;"
-            onclick="selectTile('dcf5', 'flashGreyRed', this)"
-            title="empty tile that will change colors between gray and red, this tile is different than the gray/red tile because the colors are flipped">
-      Gray/Red
     </button>
 
     <button class="toolButton"
             style="background: #fc4e51;"
             onclick="selectTile('sibs', '#fc4e51', this)"
-            title="tile used in siege, in seige the bosses spawn on these tiles. the tile has a special effect where when an entity is in contact with the tile it applies a force that attempts to move the entity to where the center of the map is. looks like a red tile">
+            title="Tile used in Siege mode. In Siege, bosses spawn on these tiles. The tile has a special effect where entities touching it are pulled toward the center of the map. Looks like a red tile.">
       Siege Boss Spawn
     </button>
 
         <button class="toolButton"
             style="background: #fceded;"
             onclick="selectTile('atmg', '#fceded', this)"
-            title='empty tile that spawns an "anti tank machine gun" at its center. the atmg locks onto and kills any tank in its view. does near infinite damage per bullet. looks like an empty tile with an atmg in it (obviously)'>
+            title='Empty tile that spawns an "Anti-Tank Machine Gun" at its center. The ATMG locks onto and destroys any tank in its view and deals near-infinite damage per bullet. (Looks like an empty tile with an ATMG in it obviously.)'>
+      Anti Tank Machine Gun
+    </button>
+  
+    <h2>Decorative Tiles</h2>
+
+    <!-- ANIMATED TILES -->
+    <button class="toolButton"
+            style="background: black; color: white"
+            onclick="selectTile('blat', 'black', this)"
+            title="Empty tile except colored black...That's it.">
+      Black Tile
     </button>
 
-    <!-- EMPTY -->
-    <button class="toolButton selectedTool"
-            style="background:#F0F7FA; color:black;"
-            onclick="selectTile('F___', '#F0F7FA', this)"
-            title="empty tile, does not spawn shapes, rocks, roids or walls, just a normal empty tile. looks like a slightly slightly bluish white">
-      Empty
+    <button class="toolButton"
+            style="background: black; color: white"
+            onclick="selectTile('blrk', 'blackrock', this)"
+            title="The Rock tile but the tile is colored black.">
+      ▣ Black Rock Tile
+    </button>
+
+    <button class="toolButton"
+            style="background: black; color: white"
+            onclick="selectTile('blrd', 'blackroid', this)"
+            title="The Mini Rock tile but the tile is colored black.">
+      □ Black Mini Rock Tile
+    </button>
+
+    <button class="toolButton"
+            style="background: linear-gradient(90deg, red, orange, yellow, green, blue, purple);"
+            onclick="selectTile('dcf0', 'rainbow', this)"
+            title="Empty tile but rainbow-colored. (The color is animated.)">
+      Rainbow
+    </button>
+
+    <button class="toolButton"
+            style="background: blue;"
+            onclick="selectTile('dcf1', 'flashBlueRed', this)"
+            title="Empty tile that changes colors between blue and red.">
+      Blue/Red
+    </button>
+
+    <button class="toolButton"
+            style="background: cyan;"
+            onclick="selectTile('dcf2', 'flashBlueGray', this)"
+            title="Empty tile that changes colors between blue and gray. This tile is different from the Gray/Blue tile because the colors are flipped.">
+      Blue/Gray
+    </button>
+
+    <button class="toolButton"
+            style="background: lightblue;"
+            onclick="selectTile('dcf3', 'flashGreyBlue', this)"
+            title="Empty tile that changes colors between gray and blue. This tile is different from the Blue/Gray tile because the colors are flipped.">
+      Gray/Blue
+    </button>
+
+    <button class="toolButton"
+            style="background: red;"
+            onclick="selectTile('dcf4', 'flashRedGrey', this)"
+            title="Empty tile that changes colors between red and gray. This tile is different from the Gray/Red tile because the colors are flipped.">
+      Red/Gray
+    </button>
+
+    <button class="toolButton"
+            style="background: pink;"
+            onclick="selectTile('dcf5', 'flashGreyRed', this)"
+            title="Empty tile that changes colors between gray and red. This tile is different from the Red/Gray tile because the colors are flipped.">
+      Gray/Red
     </button>
               <div class="popup" style="display: none;">
                 <h1>Title</h1>
