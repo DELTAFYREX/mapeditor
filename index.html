@@ -718,7 +718,7 @@
     <!-- Speed -->
     <button class="toolButton"
             style="background:#ffbf7e;"
-            onclick="selectTile('sped', '#ffbf7e', this)"
+            onclick="selectTile('sped', 'speedTile', this)"
             title="Tile that increases the velocity of tanks and projectiles. The opposite of the Water tile. Looks like an orange tile.">
       Boost Pad
     </button>
@@ -730,12 +730,28 @@
       Siege Boss Spawn
     </button>
 
-        <button class="toolButton"
+    <button class="toolButton"
             style="background: #fceded;"
             onclick="selectTile('atmg', '#fceded', this)"
             title='Default tile that spawns an "Anti-Tank Machine Gun" at its center. The ATMG locks onto and destroys any tank in its view and deals near-infinite damage per bullet. (Looks like an empty tile with an ATMG in it obviously.)'>
       Anti Tank Machine Gun
-    </button><hr>
+    </button>
+
+    <button class="toolButton"
+            style="background: #d8dfe1;"
+            onclick="selectTile('otub', '#d8dfe1', this)"
+            title='Wall tile but the wall is invisible and the color of the tile matches the out of bounds color. Can be used to simulate an area being "out of bounds" despite it not being (looks like an our of bounds colored tile)'>
+      Fake Out-Of-Bounds Tile
+    </button>
+
+    <button class="toolButton"
+            style="background: #c3c6c9;"
+            onclick="selectTile('oubg', '#c3c6c9', this)"
+            title='Wall tile but the wall is at 50% opacity, players can pass through it. Typically paired with the Fake out of bounds tile to make the illusion of going outside the map. Looks like a wall tile but the wall is at 50% opacity.'>
+      Fake Wall
+    </button>
+    
+    <hr>
   
     <h2>Decorative Tiles</h2>
 
@@ -895,7 +911,7 @@ checkbox.addEventListener('change', (event) => {
 
       "nest": "#E0E1F4",
 
-      "sped": "#ffbf7e",
+      "sped": "speedTile",
 
       "sblu": "teamBlueSpawn",
 
@@ -938,6 +954,10 @@ checkbox.addEventListener('change', (event) => {
       "sibs": "#fc4e51",
       
       "atmg": "antitankminigun",
+
+      "otub": "#d8dfe1",
+      
+      "oubg": "#c3c6c9",
 
     };
 
@@ -1690,6 +1710,15 @@ text = text.replace(/\b([a-zA-Z0-9_]+)\b/g, '"$1"');
 
             cell.style.background =
               `hsl(${hue}, 100%, 50%)`;
+          }
+
+          else if (tile === "sped") {
+
+            const flash =
+              Math.sin(time / 150) > 0;
+
+            cell.style.background =
+              flash ? "orange" : "red";
           }
 
           // BLUE / RED
