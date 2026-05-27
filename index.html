@@ -1333,6 +1333,13 @@ checkbox.addEventListener('change', (event) => {
         return;
       }
 
+      if (currentTile === "atmg") {
+
+        setSoftPointTileblack(cell, "⦾", "#fceded", "black");
+
+        return;
+      }
+
       cell.innerHTML = "";
 
       cell.style.position = "";
@@ -1514,14 +1521,44 @@ checkbox.addEventListener('change', (event) => {
             setSoftPointTileblack(cell, "▣", "#bababa");
           }
 
-          else if (currentTile === "blackroid") {
+          else if (currentTile === "blrd") {
 
             setSoftPointTileblack(cell, "□", "black");
           }
 
-          else if (currentTile === "blackrock") {
+          else if (currentTile === "blrk") {
 
             setSoftPointTileblack(cell, "▣", "black");
+          }
+
+          else if (currentTile === "T1WL") {
+
+            setSoftPointTile(cell, "⇄");
+          }
+
+          else if (currentTile === "T2WL") {
+
+            setSoftPointTile(cell, "⇄");
+          }
+
+          else if (currentTile === "T3WL") {
+
+            setSoftPointTile(cell, "⇄");
+          }
+
+          else if (currentTile === "T4WL") {
+
+            setSoftPointTile(cell, "⇄");
+          }
+
+          else if (currentTile === "T5WL") {
+
+            setSoftPointTile(cell, "⇄");
+          }
+
+          else if (currentTile === "T6WL") {
+
+            setSoftPointTile(cell, "⇄");
           }
 
           else {
