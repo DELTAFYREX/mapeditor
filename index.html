@@ -750,7 +750,67 @@
             title='Wall tile but the wall is at 50% opacity, players can pass through it. Typically paired with the Fake out of bounds tile to make the illusion of going outside the map. Looks like a wall tile but the wall is at 50% opacity.'>
       Fake Wall
     </button>
+
+    <hr>
+  
+    <h2>Sandbox Tiles</h2>
     
+    <button class="toolButton"
+            style="background: #52A8EB;"
+            onclick="selectTile('T1WL', '#52A8EB', this)"
+            title='Smaller wall that if collided with, sets your team to the blue team. looks like a tile with the blue team color and a small wall with a matching color.'>
+      Blue Team Switch Wall
+    </button>
+
+    <button class="toolButton"
+            style="background: #FC4E51;"
+            onclick="selectTile('T2WL', '#FC4E51', this)"
+            title='Smaller wall that if collided with, sets your team to the red team. looks like a tile with the red team color and a small wall with a matching color.'>
+      Red Team Switch Wall
+    </button>
+
+    <button class="toolButton"
+            style="background: #8ABC3F;"
+            onclick="selectTile('T3WL', '#8ABC3F', this)"
+            title='Smaller wall that if collided with, sets your team to the green team. looks like a tile with the green team color and a small wall with a matching color.'>
+      Green Team Switch Wall
+    </button>
+
+    <button class="toolButton"
+            style="background: #ED2891;"
+            onclick="selectTile('T4WL', '#ED2891', this)"
+            title='Smaller wall that if collided with, sets your team to the purple team. looks like a tile with the purple team color and a small wall with a matching color.'>
+      Purple Team Switch Wall
+    </button>
+
+    <button class="toolButton"
+            style="background: #c49608;"
+            onclick="selectTile('T5WL', '#c49608', this)"
+            title='Smaller wall that if collided with, sets your team to the yellow team. looks like a tile with the yellow team color and a small wall with a matching color.'>
+      Yellow Team Switch Wall
+    </button>
+
+    <button class="toolButton"
+            style="background: #ec7b0f;"
+            onclick="selectTile('T6WL', '#ec7b0f', this)"
+            title='Smaller wall that if collided with, sets your team to the orange team. looks like a tile with the orange team color and a small wall with a matching color.'>
+      Orange Team Switch Wall
+    </button>
+
+    <button class="toolButton"
+            style="background: #13808e;"
+            onclick="selectTile('hook', '#13808e', this)"
+            title='A darker teal tile with a tiny slightly transparent square in the middle of the same color. if you shoot the square with a bullet it will pull you towards it like a grapple point in other games. looks like a darker teal tile with a small transparent darker teal square in the center.'>
+      Hookpoint
+    </button>
+
+    <button class="toolButton"
+            style="background: yellow;"
+            onclick="selectTile('FWAL', 'yellow', this)"
+            title='A glowing yellow wall that if stood next to, increases your fov to allow you to see more of the map. looks like a normal wall tile but the wall is yellow and glowing'>
+      FOV Wall
+    </button>
+
     <hr>
   
     <h2>Decorative Tiles</h2>
@@ -868,7 +928,7 @@
                   </div>
                 </div>
                 </div>
-                <hi style="position: absolute; right: 283px; bottom: 0px">v1.5</hi>
+                <hi style="position: absolute; right: 283px; bottom: 0px">v2</hi>
   <script>
 
     let room = [];
@@ -958,6 +1018,22 @@ checkbox.addEventListener('change', (event) => {
       "otub": "#d8dfe1",
       
       "oubg": "#c3c6c9",
+
+      "T1WL": "#52A8EB",
+
+      "T2WL": "#FC4E51",
+
+      "T3WL": "#8ABC3F",
+
+      "T4WL": "#ED2891",
+
+      "T5WL": "#c49608",
+
+      "T6WL": "#ec7b0f",
+
+      "hook": "#13808e",
+
+      "FWAL": "yellow",
 
     };
 
